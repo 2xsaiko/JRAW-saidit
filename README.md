@@ -3,7 +3,7 @@
 [![travis-ci build status](https://img.shields.io/travis/mattbdean/JRAW.svg)](https://travis-ci.org/mattbdean/JRAW)
 [![Latest release](https://img.shields.io/github/release/mattbdean/JRAW.svg)](https://bintray.com/thatjavanerd/maven/JRAW/_latestVersion)
 [![Kotlin 1.2.41](https://img.shields.io/badge/Kotlin-1.2.41-blue.svg)](http://kotlinlang.org)
-[![API coverage](https://img.shields.io/badge/API_coverage-49%25-9C27B0.svg)](https://github.com/thatJavaNerd/JRAW/blob/master/ENDPOINTS.md)
+[![API coverage](https://img.shields.io/badge/API_coverage-34%25-9C27B0.svg)](https://github.com/thatJavaNerd/JRAW/blob/master/ENDPOINTS.md)
 [![Codecov branch](https://img.shields.io/codecov/c/github/mattbdean/JRAW.svg)](https://codecov.io/gh/mattbdean/JRAW)
 
 ```groovy
@@ -51,7 +51,7 @@ JRAW doesn't target Android specifically, but there is an [extension library](ht
 
 ## Contributing
 
-To get started you'll need to create two [reddit OAuth2 apps](https://www.reddit.com/prefs/apps), one script and one installed, and then create a subreddit.
+To get started you'll need to create two [reddit OAuth2 apps](https://www.saidit.net/prefs/apps), one script and one installed, and then create a subreddit.
 
 To have this done automatically for you, run this command:
 

@@ -130,7 +130,7 @@ abstract class PublicContributionReference internal constructor(reddit: RedditCl
      * be stickied at a time.) Only top-level comments may be stickied. Requires moderator privileges. Can only be used
      * with [DistinguishedStatus.MODERATOR] or [DistinguishedStatus.ADMIN].
      *
-     * See [Reddit API documentation](https://www.reddit.com/dev/api/#POST_api_distinguish)
+     * See [Reddit API documentation](https://www.saidit.net/dev/api/#POST_api_distinguish)
      */
     @EndpointImplementation(Endpoint.POST_DISTINGUISH)
     fun distinguish(how: DistinguishedStatus, sticky: Boolean) {

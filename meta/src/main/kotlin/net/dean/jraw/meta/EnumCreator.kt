@@ -76,7 +76,7 @@ class EnumCreator(private val overview: EndpointOverview, private val indent: In
         const val PACKAGE = "net.dean.jraw"
         const val INNER_CLASS_NAME = "Constant"
         const val SUBREDDIT_PREFIX_CONSTANT_NAME = "OPTIONAL_SUBREDDIT"
-        const val SUBREDDIT_PREFIX_CONSTANT_VALUE = "[/r/{subreddit}]"
+        const val SUBREDDIT_PREFIX_CONSTANT_VALUE = "[/s/{subreddit}]"
         @JvmField val RELATIVE_OUTPUT_FILE = PACKAGE.replace('.', File.separatorChar) + "/$ENUM_NAME.java"
 
         private val stripPrefixes = listOf("/api/v1/", "/api/", "/")
@@ -89,8 +89,8 @@ class EnumCreator(private val overview: EndpointOverview, private val indent: In
                 .filter { name.startsWith(it) }
                 .forEach { name = name.substring(it.length).removeSuffix(".json") }
 
-            if (name.startsWith("r/{subreddit}"))
-                name = "subreddit" + name.substring("r/{subreddit}".length)
+            if (name.startsWith("s/{subreddit}"))
+                name = "subreddit" + name.substring("s/{subreddit}".length)
 
             return (e.method + '_' + name.replace('/', '_'))
                 .toUpperCase()

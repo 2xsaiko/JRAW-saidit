@@ -29,4 +29,4 @@ class RateLimitException(val cooldown: Double, cause: NetworkException) :
     RedditException("reddit is ratelimiting this action, try again in ~${cooldown.toInt()} seconds", cause)
 
 class NoSuchSubredditException(val subreddit: String, cause: Throwable? = null) :
-    RuntimeException("/r/$subreddit doesn't seem to exist", cause)
+    RuntimeException("/s/$subreddit doesn't seem to exist", cause)

@@ -21,7 +21,7 @@ import okhttp3.WebSocketListener
 import java.util.concurrent.TimeUnit
 
 /**
- * Specialized class for sending requests to [oauth.reddit.com](https://www.reddit.com/dev/api/oauth).
+ * Specialized class for sending requests to [oauth.saidit.net](https://www.saidit.net/dev/api/oauth).
  *
  * RedditClients cannot be instantiated directly through the public API. See the
  * [OAuthHelper][net.dean.jraw.oauth.OAuthHelper] class.
@@ -94,7 +94,7 @@ class RedditClient internal constructor(
         // make the request and parse the response.
         authManager.currentUsername = overrideUsername ?: try {
                 val me = request(HttpRequest.Builder()
-                    .url("https://oauth.reddit.com/api/v1/me")
+                    .url("https://oauth.saidit.net/api/v1/me")
                     .header("Authorization", "bearer ${initialOAuthData.accessToken}")
                     .build()).deserialize<Map<*, *>>()
 
@@ -111,12 +111,12 @@ class RedditClient internal constructor(
     }
 
     /**
-     * Creates a [HttpRequest.Builder], setting `secure(true)`, `host("oauth.reddit.com")`, and the Authorization header
+     * Creates a [HttpRequest.Builder], setting `secure(true)`, `host("oauth.saidit.net")`, and the Authorization header
      */
     fun requestStub(): HttpRequest.Builder {
         return HttpRequest.Builder()
             .secure(true)
-            .host("oauth.reddit.com")
+            .host("oauth.saidit.net")
             .header("Authorization", "bearer ${authManager.accessToken}")
     }
 
@@ -236,7 +236,7 @@ class RedditClient internal constructor(
      * }
      * ```
      *
-     * This will execute `POST https://oauth.reddit.com/api/v1/foo` with the headers 'X-Foo: Bar' and
+     * This will execute `POST https://oauth.saidit.net/api/v1/foo` with the headers 'X-Foo: Bar' and
      * 'Authorization: bearer $accessToken' and a form body of `baz=qux`.
      *
      * For reference, this same request can be executed like this:
@@ -331,10 +331,10 @@ class RedditClient internal constructor(
      *
      * Reddit has some special subreddits:
      *
-     * - /r/all - posts from every subreddit
-     * - /r/popular - includes posts from subreddits that have opted out of /r/all. Guaranteed to not have NSFW content.
-     * - /r/mod - submissions from subreddits the logged-in user moderates
-     * - /r/friends - submissions from the user's friends
+     * - /s/all - posts from every subreddit
+     * - /s/popular - includes posts from subreddits that have opted out of /s/all. Guaranteed to not have NSFW content.
+     * - /s/mod - submissions from subreddits the logged-in user moderates
+     * - /s/friends - submissions from the user's friends
      *
      * Trying to use [SubredditReference.about], [SubredditReference.submit], or the like for these subreddits will
      * likely result in an API-side error.
@@ -346,9 +346,9 @@ class RedditClient internal constructor(
      * example, you can't submit a post to a compound subreddit).
      *
      * This works by using a useful little-known trick. You can view multiple subreddits at one time by joining them
-     * together with a `+`, like "/r/redditdev+programming+kotlin"
+     * together with a `+`, like "/s/redditdev+programming+kotlin"
      *
-     * Here's how to fetch 50 posts from /r/pics and /r/funny as a quick example:
+     * Here's how to fetch 50 posts from /s/pics and /s/funny as a quick example:
      *
      * ```kotlin
      * val paginator = redditClient.subreddits("pics", "funny").posts().limit(50).build()
@@ -419,7 +419,7 @@ class RedditClient internal constructor(
      * built. If no subreddits are given, comments will be from any subreddit.
      */
     fun latestComments(vararg subreddits: String): BarebonesPaginator.Builder<Comment> {
-        val prefix = if (subreddits.isEmpty()) "" else "/r/" + subreddits.joinToString("+")
+        val prefix = if (subreddits.isEmpty()) "" else "/s/" + subreddits.joinToString("+")
         return BarebonesPaginator.Builder.create(this, "$prefix/comments")
     }
 
@@ -432,7 +432,7 @@ class RedditClient internal constructor(
      * @see PublicContribution
      */
     fun gildedContributions(vararg subreddits: String): BarebonesPaginator.Builder<PublicContribution<*>> {
-        val prefix = if (subreddits.isEmpty()) "" else "/r/" + subreddits.joinToString("+")
+        val prefix = if (subreddits.isEmpty()) "" else "/s/" + subreddits.joinToString("+")
         return BarebonesPaginator.Builder.create(this, "$prefix/gilded")
     }
 

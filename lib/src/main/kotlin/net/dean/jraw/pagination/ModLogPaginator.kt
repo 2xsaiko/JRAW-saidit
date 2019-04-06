@@ -28,7 +28,7 @@ class ModLogPaginator private constructor(
 
     class Builder(reddit: RedditClient, val subreddit: String) : Paginator.Builder<ModAction>(
         reddit = reddit,
-        baseUrl = "/r/${JrawUtils.urlEncode(subreddit)}/about/log",
+        baseUrl = "/s/${JrawUtils.urlEncode(subreddit)}/about/log",
         clazz = ModAction::class.java
     ) {
         private var limit: Int = Paginator.DEFAULT_LIMIT

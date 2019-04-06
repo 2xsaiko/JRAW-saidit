@@ -10,7 +10,7 @@ import java.lang.reflect.Method
 import java.net.URL
 
 /**
- * Singleton that parses https://reddit.com/dev/api/oauth and creates instances of [EndpointMeta] using reflection and
+ * Singleton that parses https://saidit.net/dev/api/oauth and creates instances of [EndpointMeta] using reflection and
  * bytecode manipulation libraries Reflections and javassist.
  */
 class EndpointAnalyzer(private val notPlanned: List<Pair<String, String>> = listOf()) {
@@ -45,14 +45,14 @@ class EndpointAnalyzer(private val notPlanned: List<Pair<String, String>> = list
             // Remove method
             path = path.substring(method.length + 1)
 
-            // Remove paths that start with "[/r/subreddit]"
+            // Remove paths that start with "[/s/subreddit]"
             val result = removeSubredditPrefix(path)
             path = result.first
             val subredditPrefix = result.second
 
             path = fixPathParams(trimPath(path, oauthScope), redditDocLink)
 
-            val displayPath = if (subredditPrefix) "[/r/{subreddit}]$path" else path
+            val displayPath = if (subredditPrefix) "[/s/{subreddit}]$path" else path
 
             val implDetails = implDetails(method, displayPath)
 
@@ -103,8 +103,8 @@ class EndpointAnalyzer(private val notPlanned: List<Pair<String, String>> = list
     }
 
     private fun removeSubredditPrefix(path: String): Pair<String, Boolean> {
-        return if (path.startsWith("[/r/subreddit]")) {
-            path.substring("[/r/subreddit]".length) to true
+        return if (path.startsWith("[/s/subreddit]")) {
+            path.substring("[/s/subreddit]".length) to true
         } else {
             path to false
         }
@@ -187,7 +187,7 @@ class EndpointAnalyzer(private val notPlanned: List<Pair<String, String>> = list
     )
 
     companion object {
-        private const val BASE_URL = "https://www.reddit.com/dev/api/oauth"
+        private const val BASE_URL = "https://www.saidit.net/dev/api/oauth"
 
         /** Matches path parameters */
         private val pathParamRegex = Regex("\\{(.*?)}")

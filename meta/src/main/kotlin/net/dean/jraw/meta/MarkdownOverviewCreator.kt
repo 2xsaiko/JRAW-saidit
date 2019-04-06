@@ -32,7 +32,7 @@ object MarkdownOverviewCreator {
             // Purpose of this file
             block(
                 "This file contains a list of all the endpoints (regardless of if they have been implemented) that " +
-                    "can be found at the [official reddit API docs](https://www.reddit.com/dev/api/oauth). " +
+                    "can be found at the [official reddit API docs](https://www.saidit.net/dev/api/oauth). " +
                     "To update this file, run `./gradlew :meta:update`"
             )
 

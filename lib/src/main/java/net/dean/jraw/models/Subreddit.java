@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>A community built around a specific topic (e.g. /r/birdswitharms).
+ * <p>A community built around a specific topic (e.g. /s/birdswitharms).
  *
  * <p>A note about inaccessible subreddits: If a subreddit that is inaccessible to the currently authenticated user
  * (if any) is queried directly with {@link SubredditReference#about()}, an {@link net.dean.jraw.ApiException} will be
@@ -73,7 +73,7 @@ public abstract class Subreddit implements Created, Identifiable, Referenceable<
     @Json(name = "key_color")
     public abstract String getKeyColor();
 
-    /** Name without the "/r/" prefix: "pics", "funny", etc. */
+    /** Name without the "/s/" prefix: "pics", "funny", etc. */
     @Json(name = "display_name") public abstract String getName();
 
     /**
@@ -92,7 +92,7 @@ public abstract class Subreddit implements Created, Identifiable, Referenceable<
     /**
      * Markdown-formatted text used when this subreddit comes up in searches.
      *
-     * See <a href="https://www.reddit.com/subreddits/search">here</a> for more information.
+     * See <a href="https://www.saidit.net/subreddits/search">here</a> for more information.
      *
      * @see net.dean.jraw.pagination.SubredditSearchPaginator
      */
@@ -153,7 +153,7 @@ public abstract class Subreddit implements Created, Identifiable, Referenceable<
     @Override
     public String getUniqueId() { return getFullName(); }
 
-    /** The URL to access this subreddit relative to reddit.com. For example, "/r/pics" */
+    /** The URL to access this subreddit relative to saidit.net. For example, "/s/pics" */
     public abstract String getUrl();
 
     @Nullable

@@ -139,7 +139,7 @@ final class Cookbook {
 
     @CodeSample
     void sendPrivateMessageAsModerator() {
-        // Make sure to exclude the "/r/" prefix
+        // Make sure to exclude the "/s/" prefix
         redditClient.me().inbox().compose("some_subreddit_i_moderate", "receiver username",
             "subject", "body");
     }

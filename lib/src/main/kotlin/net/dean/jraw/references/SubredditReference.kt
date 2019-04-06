@@ -14,9 +14,9 @@ import net.dean.jraw.tree.RootCommentNode
 /**
  * Allows the user to perform API actions against a subreddit
  *
- * @constructor Creates a new SubredditReference for the given subreddit. Do not include the "/r/" prefix (e.g. "pics")
+ * @constructor Creates a new SubredditReference for the given subreddit. Do not include the "/s/" prefix (e.g. "pics")
  *
- * @property subreddit The name of the subreddit without the "/r/" prefix.
+ * @property subreddit The name of the subreddit without the "/s/" prefix.
  */
 class SubredditReference internal constructor(reddit: RedditClient, val subreddit: String) : AbstractReference(reddit) {
 
@@ -42,7 +42,7 @@ class SubredditReference internal constructor(reddit: RedditClient, val subreddi
         Endpoint.GET_HOT, Endpoint.GET_NEW, Endpoint.GET_RISING, Endpoint.GET_SORT, Endpoint.GET_BEST,
         type = MethodType.NON_BLOCKING_CALL
     )
-    fun posts() = DefaultPaginator.Builder.create<Submission, SubredditSort>(reddit, "/r/$subreddit", sortingAlsoInPath = true)
+    fun posts() = DefaultPaginator.Builder.create<Submission, SubredditSort>(reddit, "/s/$subreddit", sortingAlsoInPath = true)
 
     /**
      * Creates a BarebonesPaginator.Builder that will iterate over the latest comments from this subreddit when built.
@@ -175,7 +175,7 @@ class SubredditReference internal constructor(reddit: RedditClient, val subreddi
 
     private fun requestFlair(type: String): List<Flair> {
         return reddit.request {
-            it.path("/r/${JrawUtils.urlEncode(subreddit)}/api/${type}_flair")
+            it.path("/s/${JrawUtils.urlEncode(subreddit)}/api/${type}_flair")
         }.deserializeWith(JrawUtils.moshi.adapter(listOfFlairsType))
     }
 
@@ -244,7 +244,7 @@ class SubredditReference internal constructor(reddit: RedditClient, val subreddi
      * Requires mod priveleges on the subreddit.
      */
     @EndpointImplementation(Endpoint.GET_FLAIRLIST)
-    fun flairList() = BarebonesPaginator.Builder.create<SimpleFlairInfo>(reddit, "/r/$subreddit/api/flairlist")
+    fun flairList() = BarebonesPaginator.Builder.create<SimpleFlairInfo>(reddit, "/s/$subreddit/api/flairlist")
 
     /**
      * Updates users flairs on the subreddit in bulk (up to 100 rows, the rest are ignored by Reddit).
@@ -257,7 +257,7 @@ class SubredditReference internal constructor(reddit: RedditClient, val subreddi
     @EndpointImplementation(Endpoint.POST_FLAIRCSV)
     fun patchFlairList(patch: List<SimpleFlairInfo>): List<FlairPatchReport> {
         return reddit.request {
-            it.path("/r/$subreddit/api/flaircsv")
+            it.path("/s/$subreddit/api/flaircsv")
                 .post(mapOf(
                     "flair_csv" to (patch.joinToString(separator = "\n") { it.toCsvLine() })
                 ))

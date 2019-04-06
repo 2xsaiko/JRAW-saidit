@@ -19,7 +19,7 @@ dependencies {
 
 Before using this library it is highly recommended that you first read the [OAuth2 page](oauth2.md).
 
-First create a reddit OAuth2 app [here](https://www.reddit.com/prefs/apps). Note the client ID and redirect URL, you'll need these later.
+First create a reddit OAuth2 app [here](https://www.saidit.net/prefs/apps). Note the client ID and redirect URL, you'll need these later.
 
 Add these `<meta-data>` keys to your manifest:
 

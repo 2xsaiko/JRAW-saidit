@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @AutoValue
 public abstract class OAuthData implements Serializable {
-    /** A token that can be sent with an Authorization header to access oauth.reddit.com */
+    /** A token that can be sent with an Authorization header to access oauth.saidit.net */
     public abstract String getAccessToken();
 
     /** A list in scopes the access token has permission for */

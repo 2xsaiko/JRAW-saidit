@@ -93,7 +93,7 @@ public abstract class MultiredditPatch implements Serializable {
          */
         public Builder keyColor(String keyColor) { this.keyColor = keyColor; return this; }
 
-        /** A list of subreddits to include in this multireddit. Do not include the `/r/` prefix. */
+        /** A list of subreddits to include in this multireddit. Do not include the `/s/` prefix. */
         public Builder subreddits(List<String> subreddits) { this.subreddits = subreddits; return this; }
         public Builder subreddits(String... subreddits) { return subreddits(Arrays.asList(subreddits)); }
 

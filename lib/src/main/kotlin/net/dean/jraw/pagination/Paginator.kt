@@ -18,7 +18,7 @@ abstract class Paginator<T : UniquelyIdentifiable> protected constructor(
     val reddit: RedditClient,
 
     /**
-     * The path relative to reddit.com at which the Listing endpoint is located. Trailing slashes will be removed
+     * The path relative to saidit.net at which the Listing endpoint is located. Trailing slashes will be removed
      * automatically.
      */
     baseUrl: String,
@@ -38,7 +38,7 @@ abstract class Paginator<T : UniquelyIdentifiable> protected constructor(
     private var _pageNumber = 0
     private val adapter: JsonAdapter<Listing<T>>
 
-    /** The path relative to reddit.com at which the Listing endpoint is located. */
+    /** The path relative to saidit.net at which the Listing endpoint is located. */
     val baseUrl: String
 
     init {
@@ -105,7 +105,7 @@ abstract class Paginator<T : UniquelyIdentifiable> protected constructor(
         val reddit: RedditClient,
 
         /**
-         * The path relative to reddit.com at which the Listing endpoint is located. Trailing slashes will be removed
+         * The path relative to saidit.net at which the Listing endpoint is located. Trailing slashes will be removed
          * automatically.
          */
         val baseUrl: String,

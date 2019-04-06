@@ -45,7 +45,7 @@ A [[@UserAgent]] for a super useful bot could look like this:
 
 ## Create a reddit OAuth2 app
 
-reddit uses OAuth2 to authenticate 3rd party apps. The first thing you'll need to do is to register your app [here](https://www.reddit.com/prefs/apps). For the sake of simplicity, let's create a script app.
+reddit uses OAuth2 to authenticate 3rd party apps. The first thing you'll need to do is to register your app [here](https://www.saidit.net/prefs/apps). For the sake of simplicity, let's create a script app.
 
 ![client ID and client secret](https://i.imgur.com/ILMeklr.png)
 

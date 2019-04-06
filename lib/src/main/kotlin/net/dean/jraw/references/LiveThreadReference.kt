@@ -12,7 +12,7 @@ import net.dean.jraw.websocket.ReadOnlyWebSocketHelper
 import okhttp3.WebSocketListener
 
 /**
- * A reference to a [live thread](https://www.reddit.com/live)
+ * A reference to a [live thread](https://www.saidit.net/live)
  *
  * See [here](https://mattbdean.gitbooks.io/jraw/content/live_threads.html) for more.
  *

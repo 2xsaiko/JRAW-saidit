@@ -4,7 +4,7 @@ import java.io.File
 /**
  * This entry point carries out tasks on files based on an [EndpointOverview]. Every argument expects a file, so if we
  * run this program with the command line arguments `--foo /path/to/directory`, it will execute a pre-defined task
- * called "foo" providing it with a [EndpointOverview] parsed from [https://www.reddit.com/dev/api/oauth]
+ * called "foo" providing it with a [EndpointOverview] parsed from [https://www.saidit.net/dev/api/oauth]
  *
  * @see EndpointAnalyzer
  */

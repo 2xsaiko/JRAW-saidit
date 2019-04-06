@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @AutoValue
 public abstract class OAuthDataJson {
-    /** A token that can be sent with an Authorization header to access oauth.reddit.com */
+    /** A token that can be sent with an Authorization header to access oauth.saidit.net */
     @Json(name = "access_token") public abstract String getAccessToken();
 
     /** The time in seconds that the access token will be valid for */

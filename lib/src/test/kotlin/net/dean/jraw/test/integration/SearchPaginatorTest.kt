@@ -33,7 +33,7 @@ class SearchPaginatorTest : Spek({
 
         it("should build baseUrl from multiple subreddits") {
             val builder = SearchPaginator.inSubreddits(reddit, "pics", "funny")
-            builder.baseUrl.should.equal("/r/pics+funny/search")
+            builder.baseUrl.should.equal("/s/pics+funny/search")
         }
     }
 })

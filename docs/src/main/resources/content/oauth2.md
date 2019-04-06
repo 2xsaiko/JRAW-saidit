@@ -16,7 +16,7 @@ Normally, these apps require a user to allow the app access to their account. Th
 
 This makes for a total of five different [[@net.dean.jraw.oauth.AuthMethod]]s.
 
-To create a reddit OAuth2 app, see [here](https://www.reddit.com/prefs/apps).
+To create a reddit OAuth2 app, see [here](https://www.saidit.net/prefs/apps).
 
 ## Automatic Authentication
 
@@ -43,7 +43,7 @@ See the [Android](android.md) page for more.
 
 ## Renewing an Access Token
 
-Access tokens are what enables us to send requests to `oauth.reddit.com` successfully. These expire one hour after they were requested. JRAW is capable of refreshing access tokens automatically if it has the right data.
+Access tokens are what enables us to send requests to `oauth.saidit.net` successfully. These expire one hour after they were requested. JRAW is capable of refreshing access tokens automatically if it has the right data.
 
 **Automatic authentication**
 

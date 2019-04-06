@@ -22,7 +22,7 @@ class SubmissionReferenceTest : Spek({
 
     describe("upvote/downvote/unvote") {
         it("should have an effect on a model") {
-            // Grab a reference to the newest post on /r/jraw_testing2
+            // Grab a reference to the newest post on /s/jraw_testing2
             val voteRef = reddit.subreddit(moderationSubreddit)
                 .posts()
                 .sorting(SubredditSort.NEW)
@@ -170,7 +170,7 @@ class SubmissionReferenceTest : Spek({
         it("should recognize the 'limit' and 'sort' parameters") {
             val limit = 5
 
-            // GET: https://www.reddit.com/comments/92dd8?depth=1&limit=5&sort=top&sr_detail=false
+            // GET: https://www.saidit.net/comments/92dd8?depth=1&limit=5&sort=top&sr_detail=false
             val comments = refWithComments.comments(CommentsRequest.Builder()
                 .limit(limit)
                 .sort(CommentSort.TOP)
@@ -196,7 +196,7 @@ class SubmissionReferenceTest : Spek({
         it("should recognize the 'context' and 'focus' parameters") {
             val commentId = "c0b6zmq"
 
-            // GET: https://www.reddit.com/comments/92dd8?comment=c0b6zmq&context=1&sr_detail=false
+            // GET: https://www.saidit.net/comments/92dd8?comment=c0b6zmq&context=1&sr_detail=false
             val comments = refWithComments.comments(CommentsRequest.Builder()
                 .focus(commentId)
                 .context(1)

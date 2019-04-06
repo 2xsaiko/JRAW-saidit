@@ -58,7 +58,7 @@ class CredentialsTask extends DefaultTask {
         def res = http.newCall(new Request.Builder()
             .url(new HttpUrl.Builder()
             .scheme("https")
-            .host("www.reddit.com")
+            .host("www.saidit.net")
             .addPathSegments("api/login/$username")
             .build())
             .post(formBody([
@@ -85,7 +85,7 @@ class CredentialsTask extends DefaultTask {
     private AppInfo createApp(String username, String password, AppType type) {
         def redirectUrl = "https://github.com/mattbdean/JRAW"
         def res = http.newCall(new Request.Builder()
-            .url("https://www.reddit.com/api/updateapp")
+            .url("https://www.saidit.net/api/updateapp")
             .addHeader("cookie", "reddit_session=${URLEncoder.encode(this.cookie, "UTF-8")}")
             .post(formBody([
                 "uh": modhash,
@@ -139,7 +139,7 @@ class CredentialsTask extends DefaultTask {
         def id = randomString().substring(0, 10)
         def name = "jraw_test_" + id
         def res = http.newCall(new Request.Builder()
-            .url("https://www.reddit.com/api/site_admin")
+            .url("https://www.saidit.net/api/site_admin")
             .addHeader("cookie", "reddit_session=" + URLEncoder.encode(cookie, "UTF-8"))
             .post(formBody([
                 "name": name,

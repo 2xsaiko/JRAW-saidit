@@ -24,7 +24,7 @@ public abstract class Trophy implements Identifiable, Serializable {
 
     /**
      * An optional URL that highlights where/how the user gained the trophy. If this URL is relative, it is relative to
-     * `reddit.com`
+     * `saidit.net`
      */
     @Nullable
     public abstract String getUrl();

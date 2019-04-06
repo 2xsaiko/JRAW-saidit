@@ -64,7 +64,7 @@ class HttpRequestTest: Spek({
             .endpoint(Endpoint.DELETE_MULTI_MULTIPATH_R_SRNAME, "foo", "bar")
             .build()
 
-        r.url.should.equal("https://oauth.reddit.com/api/multi/foo/r/bar")
+        r.url.should.equal("https://oauth.saidit.net/api/multi/foo/s/bar")
 
         // endpoint() doesn't change the HTTP method
         r.method.should.equal("GET")
@@ -75,7 +75,7 @@ class HttpRequestTest: Spek({
             .endpoint(Endpoint.GET_HOT, "pics")
             .build()
 
-        r.url.should.equal("https://oauth.reddit.com/r/pics/hot")
+        r.url.should.equal("https://oauth.saidit.net/s/pics/hot")
     }
 
     it("endpoint with no subreddit sets the url correctly") {
@@ -83,7 +83,7 @@ class HttpRequestTest: Spek({
             .endpoint(Endpoint.GET_HOT, null)
             .build()
 
-        r.url.should.equal("https://oauth.reddit.com/hot")
+        r.url.should.equal("https://oauth.saidit.net/hot")
     }
 
     it("endpoint throws exception on null parameter") {

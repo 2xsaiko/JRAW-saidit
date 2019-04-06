@@ -1,6 +1,6 @@
 # Live Threads
 
-reddit rolled out support for WebSocket-based event streams in the form of a "live thread" in 2014. These threads are typically dedicated to timely and newsworthy topics like natural disasters, big sporting events, or major political happenings (see [/r/live](https://www.reddit.com/r/live/) for examples).
+reddit rolled out support for WebSocket-based event streams in the form of a "live thread" in 2014. These threads are typically dedicated to timely and newsworthy topics like natural disasters, big sporting events, or major political happenings (see [/s/live](https://www.saidit.net/s/live/) for examples).
 
 Creating a live thread requires the ability to create a subreddit. Generally, the user needs to have more than 100 karma. Once the user jumps this hurdle, creating a live thread is a simple process.
 

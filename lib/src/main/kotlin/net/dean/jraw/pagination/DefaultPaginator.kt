@@ -54,7 +54,7 @@ open class DefaultPaginator<T : UniquelyIdentifiable> protected constructor(
 
         /**
          * If true, the sorting will be included as a query parameter instead of a path parameter. Most endpoints
-         * support (and require) specifying the sorting as a path parameter like this: `/r/pics/top?sort=top`. However,
+         * support (and require) specifying the sorting as a path parameter like this: `/s/pics/top?sort=top`. However,
          * other endpoints 404 when given a path like this, in which case the sorting will need to be specified via
          * query parameter only
          */

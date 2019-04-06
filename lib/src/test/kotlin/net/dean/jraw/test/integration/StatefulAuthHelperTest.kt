@@ -16,7 +16,7 @@ class StatefulAuthHelperTest : Spek({
         ensureAuthenticated(reddit)
         // GET /api/v1/me requires the identity scope
         reddit.canAccess(Endpoint.GET_ME).should.be.`true`
-        // GET [/r/subreddit]/stylesheet requires the modconfig scope, which we didn't request
+        // GET [/s/subreddit]/stylesheet requires the modconfig scope, which we didn't request
         reddit.canAccess(Endpoint.GET_STYLESHEET).should.be.`false`
 
         val manager = reddit.authManager

@@ -22,7 +22,7 @@ import net.dean.jraw.pagination.DefaultPaginator
 class MultiredditReference internal constructor(reddit: RedditClient, val username: String, val multiredditName: String) :
     AbstractReference(reddit) {
 
-    /** The path relative to `reddit.com/` that this multireddit can be accessed with. No leading slash. */
+    /** The path relative to `saidit.net/` that this multireddit can be accessed with. No leading slash. */
     val multiPath = multiPath(username, multiredditName)
 
     /** Alias to [createOrUpdate] for the sake of semantics */

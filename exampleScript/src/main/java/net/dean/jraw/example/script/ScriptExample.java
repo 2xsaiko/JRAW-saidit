@@ -38,7 +38,7 @@ public final class ScriptExample {
 
         for (Submission post : firstPage) {
             if (post.getDomain().contains("imgur.com")) {
-                System.out.println(String.format("%s (/r/%s, %s points) - %s",
+                System.out.println(String.format("%s (/s/%s, %s points) - %s",
                     post.getTitle(), post.getSubreddit(), post.getScore(), post.getUrl()));
             }
         }

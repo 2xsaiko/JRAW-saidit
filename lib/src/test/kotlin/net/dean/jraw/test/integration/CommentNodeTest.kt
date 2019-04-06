@@ -18,10 +18,10 @@ class CommentNodeTest : Spek({
     val root: RootCommentNode by lazy { reddit.submission(SUBMISSION_ID).comments() }
     val a: CommentNode<Comment> by lazy { root.replies[0] }
 
-    // reddit.com/comments/6t8ioo
+    // saidit.net/comments/6t8ioo
     val complexTree: RootCommentNode by lazy { reddit.submission("92dd8").comments() }
 
-    // reddit.com/comments/2onit4
+    // saidit.net/comments/2onit4
     val simpleTree: RootCommentNode by lazy { reddit.submission("2onit4").comments() }
 
     /*

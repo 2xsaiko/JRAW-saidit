@@ -179,7 +179,7 @@ class SelfUserReference(reddit: RedditClient) : UserReference<SelfUserFlairRefer
     }
 
     /**
-     * Gets a Map of preferences set at [https://www.reddit.com/prefs].
+     * Gets a Map of preferences set at [https://www.saidit.net/prefs].
      *
      * Likely to throw an [ApiException] if authenticated via application-only credentials
      */
@@ -193,7 +193,7 @@ class SelfUserReference(reddit: RedditClient) : UserReference<SelfUserFlairRefer
      * Patches over certain user preferences and returns all preferences.
      *
      * Although technically you can send any value as a preference value, generally only strings and booleans are used.
-     * See [here](https://www.reddit.com/dev/api/oauth#GET_api_v1_me_prefs) for a list of all available preferences.
+     * See [here](https://www.saidit.net/dev/api/oauth#GET_api_v1_me_prefs) for a list of all available preferences.
      *
      * Likely to throw an [ApiException] if authenticated via application-only credentials
      */

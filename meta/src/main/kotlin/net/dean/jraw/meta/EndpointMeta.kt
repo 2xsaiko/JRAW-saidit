@@ -10,7 +10,7 @@ data class EndpointMeta(
     val path: String,
 
     /**
-     * If [subredditPrefix], includes the text `[/r/{subreddit}]` to signify that the client may optionally specify a
+     * If [subredditPrefix], includes the text `[/s/{subreddit}]` to signify that the client may optionally specify a
      * subreddit prefix.
      */
     val displayPath: String = path,
@@ -19,14 +19,14 @@ data class EndpointMeta(
     val oauthScope: String,
 
     /**
-     * The URL to reddit's documentation at https://www.reddit.com/dev/api/oauth. For example, the doc link for
-     * `POST /api/comment` is `https://www.reddit.com/dev/api/oauth#POST_api_comment`.
+     * The URL to reddit's documentation at https://www.saidit.net/dev/api/oauth. For example, the doc link for
+     * `POST /api/comment` is `https://www.saidit.net/dev/api/oauth#POST_api_comment`.
      */
     val redditDocLink: String,
 
     /**
-     * True if the original path was prefixed with "[/r/subreddit]", indicating that a request can be made either to
-     * `/foo` or `/r/{subreddit}/foo`
+     * True if the original path was prefixed with "[/s/subreddit]", indicating that a request can be made either to
+     * `/foo` or `/s/{subreddit}/foo`
      */
     val subredditPrefix: Boolean,
 

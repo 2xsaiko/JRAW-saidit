@@ -79,7 +79,7 @@ class RedditModelAdapterFactory(
                 val actualType = Types.newParameterizedType(RedditModelEnvelope::class.java, type)
                 val delegate = moshi.adapter<RedditModelEnvelope<*>>(actualType).nullSafe()
 
-                // A call to /r/{subreddit}/about can return a Listing if the subreddit doesn't exist. Other types are
+                // A call to /s/{subreddit}/about can return a Listing if the subreddit doesn't exist. Other types are
                 // probably fine, so we don't need to take the performance hit when deserialzing them
                 val expectedKind = if (type == Subreddit::class.java) KindConstants.SUBREDDIT else null
                 StaticAdapter(registry, delegate, expectedKind)

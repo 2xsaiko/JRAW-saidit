@@ -1,6 +1,6 @@
 # All methods that are not planned for implementation go here. Blank lines and lines that start with '#' are ignored.
 # Make sure to specify both the HTTP verb (GET, POST, etc) and the endpoint's display path. The display path is just
-# like the normal path, but includes "[/r/{subreddit}]" at the beginning. If you're confused, just copy the path of
+# like the normal path, but includes "[/s/{subreddit}]" at the beginning. If you're confused, just copy the path of
 # the endpoint you want to ignore from Endpoint.java in the main library.
 
 # No plans to support captchas

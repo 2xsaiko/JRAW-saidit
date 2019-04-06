@@ -11,7 +11,7 @@ import java.lang.reflect.Type
 /**
  * This is a special factory for deserializing SubmissionData objects.
  *
- * The only place this is used is when querying Submissions directly, e.g. `GET reddit.com/comments/{id}` when executing
+ * The only place this is used is when querying Submissions directly, e.g. `GET saidit.net/comments/{id}` when executing
  * `redditClient.submission(id).comments()`
  */
 class SubmissionDataAdapterFactory : JsonAdapter.Factory {

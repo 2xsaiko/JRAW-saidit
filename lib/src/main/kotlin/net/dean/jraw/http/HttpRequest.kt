@@ -144,19 +144,19 @@ class HttpRequest internal constructor(
         /** Sets the URL's scheme to "https" if true, otherwise "http." Defaults to "https." */
         fun secure(flag: Boolean = true): Builder { this.url.scheme("http" + if (flag) "s" else ""); return this }
 
-        /** Sets the hostname (e.g. "google.com" or "oauth.reddit.com") */
+        /** Sets the hostname (e.g. "google.com" or "oauth.saidit.net") */
         fun host(host: String): Builder { this.url.host(host); return this }
 
         /**
-         * Sets this Builder's path to the given Endpoint's path and changes the host to `oauth.reddit.com`. This method
+         * Sets this Builder's path to the given Endpoint's path and changes the host to `oauth.saidit.net`. This method
          * does not change the HTTP method.
          */
         fun endpoint(e: Endpoint, vararg pathParams: String?): Builder {
-            this.url.host("oauth.reddit.com")
+            this.url.host("oauth.saidit.net")
             return if (e.path.startsWith(Endpoint.Constant.OPTIONAL_SUBREDDIT)) {
                 if (pathParams.isEmpty())
                     throw IllegalArgumentException("Expected at least one path argument for endpoint with optional subreddit")
-                val optionalPath = pathParams[0]?.let { "/r/${JrawUtils.urlEncode(it)}" } ?: ""
+                val optionalPath = pathParams[0]?.let { "/s/${JrawUtils.urlEncode(it)}" } ?: ""
                 val requiredPath = e.path.substringAfter(Endpoint.Constant.OPTIONAL_SUBREDDIT)
                 val requiredPathParams = pathParams.drop(1).toTypedArray().requireNoNulls()
                 path(optionalPath + requiredPath, *requiredPathParams)

@@ -52,7 +52,7 @@ class StatefulAuthHelper internal constructor(
      * @param requestRefreshToken If true, a refresh token will be returned as well as an access token. This refresh
      * token can be used to request more access tokens until revoked.
      * @param useMobileSite If true, will use the site optimized for mobile devices
-     * @param scopes A list of OAuth2 scopes. See [here](https://www.reddit.com/dev/api/oauth) for a full list.
+     * @param scopes A list of OAuth2 scopes. See [here](https://www.saidit.net/dev/api/oauth) for a full list.
      */
     fun getAuthorizationUrl(requestRefreshToken: Boolean = true, useMobileSite: Boolean = true, vararg scopes: String): String {
         // Generate a random alpha-numeric string
@@ -64,7 +64,7 @@ class StatefulAuthHelper internal constructor(
         // Use HttpRequest.Builder as an interface to create a URL
         return HttpRequest.Builder()
             .secure(true)
-            .host("www.reddit.com")
+            .host("www.saidit.net")
             .path("/api/v1/authorize${if (useMobileSite) ".compact" else ""}")
             .query(mapOf(
                 "client_id" to creds.clientId,
@@ -118,7 +118,7 @@ class StatefulAuthHelper internal constructor(
         try {
             val response: OAuthData = http.execute(HttpRequest.Builder()
                 .secure(true)
-                .host("www.reddit.com")
+                .host("www.saidit.net")
                 .path("/api/v1/access_token")
                 .post(mapOf(
                     "grant_type" to "authorization_code",

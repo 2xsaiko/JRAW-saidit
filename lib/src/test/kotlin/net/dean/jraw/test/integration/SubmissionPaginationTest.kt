@@ -19,7 +19,7 @@ class SubmissionPaginationTest : Spek({
                 .sorting(SubredditSort.TOP)
                 .timePeriod(TimePeriod.ALL)
 
-            builder.baseUrl.should.equal("/r/pics")
+            builder.baseUrl.should.equal("/s/pics")
 
             val ref = builder.build()
             ref.limit.should.equal(Paginator.RECOMMENDED_MAX_LIMIT)

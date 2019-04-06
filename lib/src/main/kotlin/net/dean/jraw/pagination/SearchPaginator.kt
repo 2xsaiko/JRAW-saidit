@@ -9,7 +9,7 @@ import net.dean.jraw.models.Submission
 import net.dean.jraw.models.TimePeriod
 
 /**
- * This class allows access to [Reddit search functionality](https://www.reddit.com/search).
+ * This class allows access to [Reddit search functionality](https://www.saidit.net/search).
  * Construct the [SearchPaginator] using [SearchPaginator.Builder] constructor or provided methods in its companion object.
  */
 class SearchPaginator private constructor(
@@ -70,7 +70,7 @@ class SearchPaginator private constructor(
      *
      * See
      * - [reddit search on Reddit Wiki](https://www.reddit.com/wiki/search)
-     * - [reddit search API documentation](https://www.reddit.com/dev/api#GET_search)
+     * - [reddit search API documentation](https://www.saidit.net/dev/api#GET_search)
      *
      * The last revision of the reddit search wiki page to describe [CLOUDSEARCH] can be found
      * [here](https://www.reddit.com/wiki/search?v=1d92a164-31a3-11e7-a834-0aab9d436d2a) which was posted around the time
@@ -108,7 +108,7 @@ class SearchPaginator private constructor(
             if (subreddits.isEmpty())
                 return everywhere(reddit)
 
-            val prefix = subreddits.joinToString(prefix = "/r/", separator = "+")
+            val prefix = subreddits.joinToString(prefix = "/s/", separator = "+")
             return Builder(reddit, prefix + baseUrlSuffix)
         }
 

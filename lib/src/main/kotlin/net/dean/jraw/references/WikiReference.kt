@@ -46,17 +46,17 @@ class WikiReference internal constructor(reddit: RedditClient, val subreddit: St
     /** Returns a Paginator.Builder that iterates through all revisions of all wiki pages */
     @EndpointImplementation(Endpoint.GET_WIKI_REVISIONS, type = MethodType.NON_BLOCKING_CALL)
     fun revisions(): BarebonesPaginator.Builder<WikiRevision> =
-        BarebonesPaginator.Builder.create(reddit, "/r/$subreddit/wiki/revisions")
+        BarebonesPaginator.Builder.create(reddit, "/s/$subreddit/wiki/revisions")
 
     /** Returns a Paginator.Builder that iterates through all revisions of a specific wiki page */
     @EndpointImplementation(Endpoint.GET_WIKI_REVISIONS_PAGE, type = MethodType.NON_BLOCKING_CALL)
     fun revisionsFor(page: String): BarebonesPaginator.Builder<WikiRevision> =
-        BarebonesPaginator.Builder.create(reddit, "/r/$subreddit/wiki/revisions/$page")
+        BarebonesPaginator.Builder.create(reddit, "/s/$subreddit/wiki/revisions/$page")
 
     /** Returns a Paginator.Builder that iterates through all Submissions that link to this specific wiki page */
     @EndpointImplementation(Endpoint.GET_WIKI_DISCUSSIONS_PAGE, type = MethodType.NON_BLOCKING_CALL)
     fun discussionsAbout(page: String): BarebonesPaginator.Builder<Submission> =
-        BarebonesPaginator.Builder.create(reddit, "/r/$subreddit/wiki/discussions/$page")
+        BarebonesPaginator.Builder.create(reddit, "/s/$subreddit/wiki/discussions/$page")
 
     /** */
     companion object {

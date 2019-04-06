@@ -95,7 +95,7 @@ public abstract class Submission implements PublicContribution<SubmissionReferen
     /** If this Submission contains adult content */
     @Json(name = "over_18") public abstract boolean isNsfw();
 
-    /** URL relative to reddit.com to access this Submission from a web browser */
+    /** URL relative to saidit.net to access this Submission from a web browser */
     public abstract String getPermalink();
 
     /** The type of content reddit thinks this submission links to */
