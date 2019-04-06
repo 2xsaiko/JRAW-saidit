@@ -2,8 +2,30 @@ package net.dean.jraw
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import net.dean.jraw.databind.*
-import net.dean.jraw.models.*
+import net.dean.jraw.databind.DistinguishedStatusAdapter
+import net.dean.jraw.databind.EmojiListAdapterFactory
+import net.dean.jraw.databind.EnvelopedListAdapterFactory
+import net.dean.jraw.databind.LiveWebSocketUpdateAdapterFactory
+import net.dean.jraw.databind.ModelAdapterFactory
+import net.dean.jraw.databind.RedditExceptionStubAdapterFactory
+import net.dean.jraw.databind.RedditModelAdapterFactory
+import net.dean.jraw.databind.SimpleFlairInfoListingAdapterFactory
+import net.dean.jraw.databind.SubmissionDataAdapterFactory
+import net.dean.jraw.databind.UnixDateAdapterFactory
+import net.dean.jraw.databind.VoteDirectionAdapter
+import net.dean.jraw.models.Account
+import net.dean.jraw.models.Comment
+import net.dean.jraw.models.DistinguishedStatus
+import net.dean.jraw.models.KindConstants
+import net.dean.jraw.models.LiveUpdate
+import net.dean.jraw.models.Message
+import net.dean.jraw.models.ModAction
+import net.dean.jraw.models.MoreChildren
+import net.dean.jraw.models.Submission
+import net.dean.jraw.models.Subreddit
+import net.dean.jraw.models.Trophy
+import net.dean.jraw.models.VoteDirection
+import net.dean.jraw.models.WikiPage
 import net.dean.jraw.models.internal.LabeledMultiDescription
 import net.dean.jraw.models.internal.TrophyList
 import java.net.URLDecoder
@@ -29,7 +51,6 @@ object JrawUtils {
             KindConstants.TROPHY to Trophy::class.java,
             KindConstants.TROPHY_LIST to TrophyList::class.java,
             KindConstants.LABELED_MULTI_DESC to LabeledMultiDescription::class.java,
-            KindConstants.LIVE_THREAD to LiveThread::class.java,
             KindConstants.LIVE_UPDATE to LiveUpdate::class.java,
             KindConstants.MORE_CHILDREN to MoreChildren::class.java,
             KindConstants.MESSAGE to Message::class.java,

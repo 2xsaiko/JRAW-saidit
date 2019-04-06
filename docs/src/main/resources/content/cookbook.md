@@ -32,7 +32,7 @@ See also [[@UserReference]], [[@SelfUserReference]], [[@OtherUserReference]]
 
 See also [[@FlairReference]], [[@SubmissionFlairReference]], [[@UserFlairReference]], [[@SelfUserFlairReference]], and [[@OtherUserFlairReference]]
 
-{{ Cookbook.setAndRemoveFlair }}
+~~{ { Cookbook.setAndRemoveFlair } }~~
 
 ## Links and comments
 

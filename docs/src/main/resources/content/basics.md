@@ -12,8 +12,6 @@ RedditClient is also the only class that can send requests to the API (excluding
 
 The API is designed to mirror the actions a normal user might take to do the same job on the reddit website. Take for example, updating user flair on a subreddit. To do this, the user would navigate to the subreddit, browse through available flair, and update their flair with a new option.
 
-{{ Basics.updateFlair }}
-
 ## Error Handling
 
 Methods annotated with the [[@EndpointImplementation]] annotation have the ability to throw either a [[@net.dean.jraw.http.NetworkException]] or an [[@net.dean.jraw.ApiException]]. ApiExceptions are thrown when an error is detected in the JSON response. A NetworkException is thrown when an HTTP request returns a non-success status code, e.g. 404.

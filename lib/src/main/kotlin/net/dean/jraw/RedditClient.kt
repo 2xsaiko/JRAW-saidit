@@ -2,19 +2,38 @@ package net.dean.jraw
 
 import com.squareup.moshi.Types
 import net.dean.jraw.databind.Enveloped
-import net.dean.jraw.http.*
-import net.dean.jraw.models.*
+import net.dean.jraw.http.HttpLogger
+import net.dean.jraw.http.HttpRequest
+import net.dean.jraw.http.HttpResponse
+import net.dean.jraw.http.NetworkAdapter
+import net.dean.jraw.http.NetworkException
+import net.dean.jraw.http.SimpleHttpLogger
+import net.dean.jraw.models.Comment
+import net.dean.jraw.models.KindConstants
+import net.dean.jraw.models.Listing
+import net.dean.jraw.models.OAuthData
+import net.dean.jraw.models.PublicContribution
+import net.dean.jraw.models.Submission
+import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.internal.RedditExceptionStub
 import net.dean.jraw.models.internal.SubredditName
-import net.dean.jraw.models.internal.SubredditSearchResultContainer
-import net.dean.jraw.oauth.*
+import net.dean.jraw.oauth.AuthManager
+import net.dean.jraw.oauth.AuthMethod
+import net.dean.jraw.oauth.Credentials
+import net.dean.jraw.oauth.NoopTokenStore
+import net.dean.jraw.oauth.TokenStore
 import net.dean.jraw.pagination.BarebonesPaginator
 import net.dean.jraw.pagination.DefaultPaginator
 import net.dean.jraw.pagination.SearchPaginator
 import net.dean.jraw.pagination.SubredditSearchPaginator
 import net.dean.jraw.ratelimit.LeakyBucketRateLimiter
 import net.dean.jraw.ratelimit.RateLimiter
-import net.dean.jraw.references.*
+import net.dean.jraw.references.CommentReference
+import net.dean.jraw.references.OtherUserReference
+import net.dean.jraw.references.PublicContributionReference
+import net.dean.jraw.references.SelfUserReference
+import net.dean.jraw.references.SubmissionReference
+import net.dean.jraw.references.SubredditReference
 import okhttp3.HttpUrl
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
@@ -270,18 +289,6 @@ class RedditClient internal constructor(
      */
     fun user(name: String) = OtherUserReference(this, name)
 
-    /**
-     * Returns a Paginator builder that will iterate user subreddits. See [here](https://www.reddit.com/comments/6bqemt)
-     * for more info.
-     *
-     * Possible `where` values:
-     *
-     *  - `new`
-     *  - `popular`
-     */
-    @EndpointImplementation(Endpoint.GET_USERS_WHERE, type = MethodType.NON_BLOCKING_CALL)
-    fun userSubreddits(where: String) = BarebonesPaginator.Builder.create<Subreddit>(this, "/users/${JrawUtils.urlEncode(where)}")
-
     /** Creates a [DefaultPaginator.Builder] to iterate posts on the front page */
     fun frontPage() = DefaultPaginator.Builder.create<Submission, SubredditSort>(this, baseUrl = "", sortingAlsoInPath = true)
 
@@ -298,33 +305,6 @@ class RedditClient internal constructor(
      */
     @EndpointImplementation(Endpoint.GET_SUBREDDITS_SEARCH)
     fun searchSubreddits(): SubredditSearchPaginator.Builder = SubredditSearchPaginator.Builder(this)
-
-    /**
-     * Convenience function equivalent to
-     *
-     * ```java
-     * searchSubredditsByName(new SubredditSearchQuery(queryString))
-     * ```
-     */
-    fun searchSubredditsByName(query: String) = searchSubredditsByName(SubredditSearchQuery(query))
-
-    /**
-     * Searches for subreddits by name alone. A more general search for subreddits can be done using [searchSubreddits].
-     */
-    @EndpointImplementation(Endpoint.POST_SEARCH_SUBREDDITS)
-    fun searchSubredditsByName(query: SubredditSearchQuery): List<SubredditSearchResult> {
-        val container = request {
-            it.endpoint(Endpoint.POST_SEARCH_SUBREDDITS)
-                .post(mapOf(
-                    "query" to query.query,
-                    "exact" to query.exact?.toString(),
-                    "include_over_18" to query.includeNsfw?.toString(),
-                    "include_unadvertisable" to query.includeUnadvertisable?.toString()
-                ).filterValuesNotNull())
-        }.deserialize<SubredditSearchResultContainer>()
-
-        return container.subreddits
-    }
 
     /**
      * Creates a [SubredditReference]
@@ -469,19 +449,6 @@ class RedditClient internal constructor(
         }.deserializeWith(adapter)
     }
 
-    /**
-     * Creates a reference to a live thread with the given ID.
-     *
-     * To create a live thread, use [SelfUserReference.createLiveThread]:
-     *
-     * ```kt
-     * val ref: LiveThreadReference = redditClient.me().createLiveThread(LiveThread.Builder()
-     *     ...
-     *     .build())
-     * ```
-     */
-    fun liveThread(id: String) = LiveThreadReference(this, id)
-
     @JvmOverloads
     @EndpointImplementation(Endpoint.GET_RECOMMEND_SR_SRNAMES)
     fun recommendedSubreddits(subs: List<String>, includeNsfw: Boolean? = null): List<String> {
@@ -498,22 +465,6 @@ class RedditClient internal constructor(
         }.deserializeWith(JrawUtils.moshi.adapter(Types.newParameterizedType(List::class.java, SubredditName::class.java)))
 
         return names.map { it.name }
-    }
-
-    /**
-     * Returns the live thread currently being featured by reddit, or null if there is none. On the website, this
-     * appears above all posts on the front page.
-     */
-    @EndpointImplementation(Endpoint.GET_LIVE_HAPPENING_NOW)
-    fun happeningNow(): LiveThread? {
-        val res = request {
-            it.endpoint(Endpoint.GET_LIVE_HAPPENING_NOW)
-        }
-
-        // A 204 response means there's nothing happening right now
-        if (res.code == 204) return null
-
-        return res.deserialize()
     }
 
     /** @inheritDoc */

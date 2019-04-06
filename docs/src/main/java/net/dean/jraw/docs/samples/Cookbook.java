@@ -1,8 +1,22 @@
 package net.dean.jraw.docs.samples;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.docs.CodeSample;
-import net.dean.jraw.models.*;
+import net.dean.jraw.models.Account;
+import net.dean.jraw.models.Listing;
+import net.dean.jraw.models.Message;
+import net.dean.jraw.models.Multireddit;
+import net.dean.jraw.models.MultiredditPatch;
+import net.dean.jraw.models.PublicContribution;
+import net.dean.jraw.models.Submission;
+import net.dean.jraw.models.Subreddit;
+import net.dean.jraw.models.SubredditSort;
+import net.dean.jraw.models.TimePeriod;
+import net.dean.jraw.models.Trophy;
 import net.dean.jraw.pagination.BarebonesPaginator;
 import net.dean.jraw.pagination.DefaultPaginator;
 import net.dean.jraw.pagination.Paginator;
@@ -10,10 +24,6 @@ import net.dean.jraw.references.InboxReference;
 import net.dean.jraw.references.MultiredditReference;
 import net.dean.jraw.tree.CommentNode;
 import net.dean.jraw.tree.RootCommentNode;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 @SuppressWarnings("unused")
 final class Cookbook {
@@ -156,13 +166,13 @@ final class Cookbook {
         List<Trophy> someoneElses = redditClient.user("Shitty_Watercolour").trophies();
     }
 
-    @CodeSample
-    void setAndRemoveFlair() {
-        List<Flair> userFlairOptions = redditClient.subreddit("RocketLeague").userFlairOptions();
-        redditClient.subreddit("RocketLeague")
-            .selfUserFlair()
-            .updateToTemplate(userFlairOptions.get(0).getId(), "");
-    }
+//    @CodeSample
+//    void setAndRemoveFlair() {
+//        List<Flair> userFlairOptions = redditClient.subreddit("RocketLeague").userFlairOptions();
+//        redditClient.subreddit("RocketLeague")
+//            .selfUserFlair()
+//            .updateToTemplate(userFlairOptions.get(0).getId(), "");
+//    }
 
     @CodeSample
     void traverseCommentTree() {

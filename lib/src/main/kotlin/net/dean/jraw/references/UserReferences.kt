@@ -2,12 +2,26 @@ package net.dean.jraw.references
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Types
-import net.dean.jraw.*
+import net.dean.jraw.ApiException
+import net.dean.jraw.Endpoint
+import net.dean.jraw.EndpointImplementation
+import net.dean.jraw.JrawUtils
 import net.dean.jraw.JrawUtils.urlEncode
+import net.dean.jraw.MethodType
+import net.dean.jraw.RedditClient
+import net.dean.jraw.SuspendedAccountException
 import net.dean.jraw.databind.Enveloped
 import net.dean.jraw.http.NetworkException
-import net.dean.jraw.models.*
-import net.dean.jraw.models.internal.GenericJsonResponse
+import net.dean.jraw.models.Account
+import net.dean.jraw.models.AccountQuery
+import net.dean.jraw.models.AccountStatus
+import net.dean.jraw.models.KarmaBySubreddit
+import net.dean.jraw.models.Multireddit
+import net.dean.jraw.models.MultiredditPatch
+import net.dean.jraw.models.PublicContribution
+import net.dean.jraw.models.Subreddit
+import net.dean.jraw.models.Trophy
+import net.dean.jraw.models.UserHistorySort
 import net.dean.jraw.models.internal.RedditModelEnvelope
 import net.dean.jraw.models.internal.TrophyList
 import net.dean.jraw.pagination.BarebonesPaginator
@@ -160,25 +174,6 @@ class SelfUserReference(reddit: RedditClient) : UserReference<SelfUserFlairRefer
     fun createMulti(name: String, patch: MultiredditPatch) = multi(name).createOrUpdate(patch)
 
     /**
-     * Creates a live thread. The only property that's required to be non-null in the LiveThreadPatch is
-     * [title][LiveThreadPatch.title].
-     *
-     * @see LiveThreadReference.edit
-     */
-    @EndpointImplementation(Endpoint.POST_LIVE_CREATE)
-    fun createLiveThread(data: LiveThreadPatch): LiveThreadReference {
-        val res = reddit.request {
-            it.endpoint(Endpoint.POST_LIVE_CREATE)
-                .post(data.toRequestMap())
-        }.deserialize<GenericJsonResponse>()
-
-        val id = res.json?.data?.get("id") as? String ?:
-            throw IllegalArgumentException("Could not find ID")
-
-        return LiveThreadReference(reddit, id)
-    }
-
-    /**
      * Gets a Map of preferences set at [https://www.saidit.net/prefs].
      *
      * Likely to throw an [ApiException] if authenticated via application-only credentials
@@ -213,9 +208,9 @@ class SelfUserReference(reddit: RedditClient) : UserReference<SelfUserFlairRefer
      * - `moderator`
      * - `subscriber`
      */
-    @EndpointImplementation(Endpoint.GET_SUBREDDITS_MINE_WHERE, type = MethodType.NON_BLOCKING_CALL)
+    @EndpointImplementation(Endpoint.GET_SUBS_MINE_WHERE, type = MethodType.NON_BLOCKING_CALL)
     fun subreddits(where: String): BarebonesPaginator.Builder<Subreddit> {
-        return BarebonesPaginator.Builder.create(reddit, "/subreddits/mine/${JrawUtils.urlEncode(where)}")
+        return BarebonesPaginator.Builder.create(reddit, "/subs/mine/${JrawUtils.urlEncode(where)}")
     }
 
     /**

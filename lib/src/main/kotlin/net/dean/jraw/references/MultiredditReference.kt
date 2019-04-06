@@ -115,20 +115,20 @@ class MultiredditReference internal constructor(reddit: RedditClient, val userna
      * Returns a [SubredditElement] for the given subreddit belonging to this multireddit. Honestly
      * this is a pretty useless method since right now it just returns what you already know.
      */
-    @EndpointImplementation(Endpoint.GET_MULTI_MULTIPATH_R_SRNAME)
+    @EndpointImplementation(Endpoint.GET_MULTI_MULTIPATH_S_SRNAME)
     fun subredditInfo(sr: String): SubredditElement {
         return reddit.request {
-            it.endpoint(Endpoint.GET_MULTI_MULTIPATH_R_SRNAME, multiPath, sr)
+            it.endpoint(Endpoint.GET_MULTI_MULTIPATH_S_SRNAME, multiPath, sr)
                 .query(mapOf("expand_srs" to "true"))
         }.deserialize()
     }
 
     /** Adds a subreddit to this multireddit. */
-    @EndpointImplementation(Endpoint.PUT_MULTI_MULTIPATH_R_SRNAME)
+    @EndpointImplementation(Endpoint.PUT_MULTI_MULTIPATH_S_SRNAME)
     fun addSubreddit(sr: String) {
         // API returns the SubredditElement we send it, so returning that model would just be a waste of resources
         reddit.request {
-            it.endpoint(Endpoint.PUT_MULTI_MULTIPATH_R_SRNAME, multiPath, sr)
+            it.endpoint(Endpoint.PUT_MULTI_MULTIPATH_S_SRNAME, multiPath, sr)
                 .put(mapOf(
                     "model" to JrawUtils.adapter<SubredditElement>().toJson(SubredditElement.create(sr))
                 ))
@@ -136,11 +136,11 @@ class MultiredditReference internal constructor(reddit: RedditClient, val userna
     }
 
     /** Removes a subreddit from this multireddit */
-    @EndpointImplementation(Endpoint.DELETE_MULTI_MULTIPATH_R_SRNAME)
+    @EndpointImplementation(Endpoint.DELETE_MULTI_MULTIPATH_S_SRNAME)
     fun removeSubreddit(sr: String) {
         // No useful response
         reddit.request {
-            it.endpoint(Endpoint.DELETE_MULTI_MULTIPATH_R_SRNAME, multiPath, sr)
+            it.endpoint(Endpoint.DELETE_MULTI_MULTIPATH_S_SRNAME, multiPath, sr)
                 .delete()
         }
     }

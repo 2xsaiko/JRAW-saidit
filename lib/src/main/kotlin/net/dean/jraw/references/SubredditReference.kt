@@ -2,8 +2,24 @@ package net.dean.jraw.references
 
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Types
-import net.dean.jraw.*
-import net.dean.jraw.models.*
+import net.dean.jraw.ApiException
+import net.dean.jraw.Endpoint
+import net.dean.jraw.EndpointImplementation
+import net.dean.jraw.JrawUtils
+import net.dean.jraw.MethodType
+import net.dean.jraw.NoSuchSubredditException
+import net.dean.jraw.RedditClient
+import net.dean.jraw.models.Comment
+import net.dean.jraw.models.Flair
+import net.dean.jraw.models.FlairPatchReport
+import net.dean.jraw.models.PublicContribution
+import net.dean.jraw.models.Ruleset
+import net.dean.jraw.models.SimpleFlairInfo
+import net.dean.jraw.models.Submission
+import net.dean.jraw.models.SubmissionKind
+import net.dean.jraw.models.Subreddit
+import net.dean.jraw.models.SubredditRule
+import net.dean.jraw.models.SubredditSort
 import net.dean.jraw.models.internal.GenericJsonResponse
 import net.dean.jraw.models.internal.SubmissionData
 import net.dean.jraw.pagination.BarebonesPaginator
@@ -39,7 +55,7 @@ class SubredditReference internal constructor(reddit: RedditClient, val subreddi
      * Creates a new [DefaultPaginator.Builder] to iterate over this subreddit's posts. Not a blocking call.
      */
     @EndpointImplementation(
-        Endpoint.GET_HOT, Endpoint.GET_NEW, Endpoint.GET_RISING, Endpoint.GET_SORT, Endpoint.GET_BEST,
+        Endpoint.GET_HOT, Endpoint.GET_NEW, Endpoint.GET_SORT,
         type = MethodType.NON_BLOCKING_CALL
     )
     fun posts() = DefaultPaginator.Builder.create<Submission, SubredditSort>(reddit, "/s/$subreddit", sortingAlsoInPath = true)
@@ -57,11 +73,6 @@ class SubredditReference internal constructor(reddit: RedditClient, val subreddi
      * @see RedditClient.gildedContributions
      */
     fun gilded(): BarebonesPaginator.Builder<PublicContribution<*>> = reddit.gildedContributions(subreddit)
-
-    /**
-     * Read/write/update emoji on this subreddit. If the user is not a moderator, they'll only be able to read.
-     */
-    fun emoji() = EmojiReference(reddit, subreddit)
 
     /**
      * Returns a reference that allows access to subreddit moderator tools and actions
@@ -155,29 +166,29 @@ class SubredditReference internal constructor(reddit: RedditClient, val subreddi
         }
     }
 
-    /**
-     * Lists all possible flairs for users. Requires an authenticated user. Will return nothing if flair is disabled on
-     * the subreddit, the user cannot set their own flair, or they are not a moderator that can set flair.
-     *
-     * @see FlairReference.updateToTemplate
-     */
-    @EndpointImplementation(Endpoint.GET_USER_FLAIR)
-    fun userFlairOptions(): List<Flair> = requestFlair("user")
-
-    /**
-     * Lists all possible flairs for submissions to this subreddit. Requires an authenticated user. Will return nothing
-     * if the user cannot set their own link flair and they are not a moderator that can set flair.
-     *
-     * @see FlairReference.updateToTemplate
-     */
-    @EndpointImplementation(Endpoint.GET_LINK_FLAIR)
-    fun linkFlairOptions(): List<Flair> = requestFlair("link")
-
-    private fun requestFlair(type: String): List<Flair> {
-        return reddit.request {
-            it.path("/s/${JrawUtils.urlEncode(subreddit)}/api/${type}_flair")
-        }.deserializeWith(JrawUtils.moshi.adapter(listOfFlairsType))
-    }
+//    /**
+//     * Lists all possible flairs for users. Requires an authenticated user. Will return nothing if flair is disabled on
+//     * the subreddit, the user cannot set their own flair, or they are not a moderator that can set flair.
+//     *
+//     * @see FlairReference.updateToTemplate
+//     */
+//    @EndpointImplementation(Endpoint.GET_USER_FLAIR)
+//    fun userFlairOptions(): List<Flair> = requestFlair("user")
+//
+//    /**
+//     * Lists all possible flairs for submissions to this subreddit. Requires an authenticated user. Will return nothing
+//     * if the user cannot set their own link flair and they are not a moderator that can set flair.
+//     *
+//     * @see FlairReference.updateToTemplate
+//     */
+//    @EndpointImplementation(Endpoint.GET_LINK_FLAIR)
+//    fun linkFlairOptions(): List<Flair> = requestFlair("link")
+//
+//    private fun requestFlair(type: String): List<Flair> {
+//        return reddit.request {
+//            it.path("/s/${JrawUtils.urlEncode(subreddit)}/api/${type}_flair")
+//        }.deserializeWith(JrawUtils.moshi.adapter(listOfFlairsType))
+//    }
 
     /**
      * Returns a UserFlairReference for a user.

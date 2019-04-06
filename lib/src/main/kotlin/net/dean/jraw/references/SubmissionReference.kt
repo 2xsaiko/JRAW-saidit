@@ -83,19 +83,19 @@ class SubmissionReference internal constructor(reddit: RedditClient, id: String)
     }
 
     // TODO - Requires mod privileges for the subreddit that contains the post.
-    /**
-     * Sets the [spoilerStatus] of a post using the official Reddit spoiler flair.
-     */
-    @EndpointImplementation(Endpoint.POST_SPOILER, Endpoint.POST_UNSPOILER)
-    fun flagAsSpoiler(spoilerStatus: Boolean) {
-        val endpoint = if (spoilerStatus) Endpoint.POST_SPOILER else Endpoint.POST_UNSPOILER
-        reddit.request {
-            it.endpoint(endpoint)
-                .post(mapOf(
-                    "id" to fullName
-                ))
-        }
-    }
+//    /**
+//     * Sets the [spoilerStatus] of a post using the official Reddit spoiler flair.
+//     */
+//    @EndpointImplementation(Endpoint.POST_SPOILER, Endpoint.POST_UNSPOILER)
+//    fun flagAsSpoiler(spoilerStatus: Boolean) {
+//        val endpoint = if (spoilerStatus) Endpoint.POST_SPOILER else Endpoint.POST_UNSPOILER
+//        reddit.request {
+//            it.endpoint(endpoint)
+//                .post(mapOf(
+//                    "id" to fullName
+//                ))
+//        }
+//    }
 
     // TODO - Requires mod privileges for the subreddit that contains the post.
     /**
