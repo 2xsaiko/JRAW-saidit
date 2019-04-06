@@ -2,14 +2,12 @@ package net.dean.jraw.test.integration
 
 import com.squareup.moshi.JsonDataException
 import com.winterbe.expekt.should
-import net.dean.jraw.ApiException
 import net.dean.jraw.NoSuchSubredditException
 import net.dean.jraw.models.SimpleFlairInfo
 import net.dean.jraw.models.SubmissionKind
 import net.dean.jraw.test.CredentialsUtil.moderationSubreddit
 import net.dean.jraw.test.SharedObjects
 import net.dean.jraw.test.TestConfig.reddit
-import net.dean.jraw.test.TestConfig.redditUserless
 import net.dean.jraw.test.assume
 import net.dean.jraw.test.expectException
 import net.dean.jraw.test.ignoreRateLimit
@@ -67,24 +65,24 @@ class SubredditReferenceTest : Spek({
         }
     }
 
-    describe("userFlairOptions/linkFlairOptions") {
-        val srName = moderationSubreddit
-
-        it("should throw an ApiException when there is no active user") {
-            expectException(ApiException::class) {
-                redditUserless.subreddit(srName).linkFlairOptions()
-            }
-
-            expectException(ApiException::class) {
-                redditUserless.subreddit(srName).userFlairOptions()
-            }
-        }
-
-        it("should return a list of Flairs") {
-            reddit.subreddit(srName).linkFlairOptions().should.have.size.above(0)
-            reddit.subreddit(srName).userFlairOptions().should.have.size.above(0)
-        }
-    }
+//    describe("userFlairOptions/linkFlairOptions") {
+//        val srName = moderationSubreddit
+//
+//        it("should throw an ApiException when there is no active user") {
+//            expectException(ApiException::class) {
+//                redditUserless.subreddit(srName).linkFlairOptions()
+//            }
+//
+//            expectException(ApiException::class) {
+//                redditUserless.subreddit(srName).userFlairOptions()
+//            }
+//        }
+//
+//        it("should return a list of Flairs") {
+//            reddit.subreddit(srName).linkFlairOptions().should.have.size.above(0)
+//            reddit.subreddit(srName).userFlairOptions().should.have.size.above(0)
+//        }
+//    }
 
     describe("rules") {
         it("should return a Ruleset") {

@@ -4,7 +4,6 @@ import com.winterbe.expekt.should
 import net.dean.jraw.models.Flair
 import net.dean.jraw.references.SubmissionFlairReference
 import net.dean.jraw.test.SharedObjects
-import net.dean.jraw.test.TestConfig.reddit
 import net.dean.jraw.test.assume
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
@@ -15,9 +14,10 @@ class SubmissionFlairReferenceTest : Spek({
     }
 
     val flairOptions: List<Flair> by lazy {
-        reddit
-            .subreddit(SharedObjects.submittedSelfPostSubreddit)
-            .linkFlairOptions()
+//        reddit
+//            .subreddit(SharedObjects.submittedSelfPostSubreddit)
+//            .linkFlairOptions()
+        emptyList<Flair>()
     }
 
     describe("updateTo") {

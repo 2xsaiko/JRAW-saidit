@@ -1,7 +1,11 @@
 package net.dean.jraw.test.integration
 
 import com.winterbe.expekt.should
-import net.dean.jraw.models.*
+import net.dean.jraw.models.CommentSort
+import net.dean.jraw.models.DistinguishedStatus
+import net.dean.jraw.models.KindConstants
+import net.dean.jraw.models.SubredditSort
+import net.dean.jraw.models.VoteDirection
 import net.dean.jraw.references.CommentsRequest
 import net.dean.jraw.references.SubmissionReference
 import net.dean.jraw.test.CredentialsUtil.moderationSubreddit
@@ -120,16 +124,6 @@ class SubmissionReferenceTest : Spek({
             expectException(IllegalArgumentException::class) {
                 SharedObjects.submittedSelfPost!!.distinguish(DistinguishedStatus.MODERATOR, true)
             }
-        }
-    }
-
-    describe("set spoiler") {
-        assume({ SharedObjects.submittedSelfPost != null }, description = "should have a self post created") {
-            val post = SharedObjects.submittedSelfPost!!
-            post.flagAsSpoiler(true)
-            post.inspect().isSpoiler.should.be.`true`
-            post.flagAsSpoiler(false)
-            post.inspect().isSpoiler.should.be.`false`
         }
     }
 

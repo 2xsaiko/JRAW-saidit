@@ -5,11 +5,26 @@ import net.dean.jraw.RedditClient
 import net.dean.jraw.http.HttpRequest
 import net.dean.jraw.http.NetworkException
 import net.dean.jraw.http.SimpleHttpLogger
-import net.dean.jraw.models.*
+import net.dean.jraw.models.Comment
+import net.dean.jraw.models.Listing
+import net.dean.jraw.models.Submission
+import net.dean.jraw.models.Subreddit
+import net.dean.jraw.models.SubredditSort
+import net.dean.jraw.models.TimePeriod
 import net.dean.jraw.oauth.OAuthHelper
 import net.dean.jraw.pagination.Paginator
-import net.dean.jraw.test.*
+import net.dean.jraw.test.CredentialsUtil
+import net.dean.jraw.test.InMemoryLogAdapter
+import net.dean.jraw.test.MockHttpResponse
+import net.dean.jraw.test.MockNetworkAdapter
+import net.dean.jraw.test.NoopNetworkAdapter
+import net.dean.jraw.test.SpyNetworkAdapter
 import net.dean.jraw.test.TestConfig.reddit
+import net.dean.jraw.test.expectDescendingScore
+import net.dean.jraw.test.expectException
+import net.dean.jraw.test.newMockRedditClient
+import net.dean.jraw.test.newOkHttpAdapter
+import net.dean.jraw.test.withExpiration
 import okhttp3.HttpUrl
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
@@ -230,32 +245,13 @@ class RedditClientTest : Spek({
         }
     }
 
-    describe("happeningNow") {
-        it("should return a LiveThread or null when nothing big is happening") {
-            val thread = reddit.happeningNow()
-            thread?.state?.should?.equal("live")
-        }
-    }
-
-    describe("userSubreddits") {
-        val whereValues = listOf("new", "popular")
-        for (where in whereValues) {
-            it("should iterate $where") {
-                val limit = 25
-                val pages = 2
-                val paginator = reddit.userSubreddits(where).limit(limit).build()
-                paginator.accumulateMerged(pages).should.have.size(limit * pages)
-            }
-        }
-    }
-
-    describe("searchSubredditsByName") {
-        it("should return a list of results") {
-            reddit.searchSubredditsByName("tech").should.not.be.empty
-        }
-
-        it("should return 0 or 1 result when 'exact' is true") {
-            reddit.searchSubredditsByName(SubredditSearchQuery(query = "RocketLeague", exact = true)).should.have.size(1)
-        }
-    }
+//    describe("searchSubredditsByName") {
+//        it("should return a list of results") {
+//            reddit.searchSubredditsByName("tech").should.not.be.empty
+//        }
+//
+//        it("should return 0 or 1 result when 'exact' is true") {
+//            reddit.searchSubredditsByName(SubredditSearchQuery(query = "RocketLeague", exact = true)).should.have.size(1)
+//        }
+//    }
 })

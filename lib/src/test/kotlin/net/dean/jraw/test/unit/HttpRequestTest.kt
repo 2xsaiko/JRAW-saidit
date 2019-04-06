@@ -61,7 +61,7 @@ class HttpRequestTest: Spek({
 
     it("should set the host and path for endpoint()") {
         val r = HttpRequest.Builder()
-            .endpoint(Endpoint.DELETE_MULTI_MULTIPATH_R_SRNAME, "foo", "bar")
+            .endpoint(Endpoint.DELETE_MULTI_MULTIPATH_S_SRNAME, "foo", "bar")
             .build()
 
         r.url.should.equal("https://oauth.saidit.net/api/multi/foo/s/bar")

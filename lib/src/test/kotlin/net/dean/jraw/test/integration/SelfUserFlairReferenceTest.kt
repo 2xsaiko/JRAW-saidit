@@ -16,7 +16,8 @@ class SelfUserFlairReferenceTest : Spek({
     val flairRef = sr.selfUserFlair()
 
     val flairOptions: List<Flair> by lazy {
-        sr.userFlairOptions()
+        // sr.userFlairOptions()
+        emptyList<Flair>() // FIXME
     }
 
     describe("setFlairEnabled/enableFlair/disableFlair") {
