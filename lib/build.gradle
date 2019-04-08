@@ -3,10 +3,11 @@ import net.dean.jraw.gradle.VersionCommitTask
 
 apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'net.ltgt.apt-idea'
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven'
 
 ext.projectName = 'JRAW'
+
+apply from: 'https://raw.githubusercontent.com/therealfarfetchd/gradle-tools/master/publish/publish-gen1.gradle'
 
 dependencies {
     compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
@@ -88,28 +89,6 @@ artifacts {
     archives javadocJar
 }
 
-bintray {
-    user = project.hasProperty("bintrayUser") ? bintrayUser : null
-    key = project.hasProperty("bintrayKey") ? bintrayKey : null
-    pkg {
-        repo = 'maven'
-        name = projectName
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/mattbdean/JRAW.git'
-        issueTrackerUrl = 'https://github.com/mattbdean/JRAW/issues'
-        githubRepo = 'mattbdean/JRAW'
-
-        version {
-            name = project.version
-            released = new Date()
-            vcsTag = "v${project.version}"
-        }
-    }
-
-    // Upload sources, Javadoc, and the compiled jars
-    configurations = ['archives']
-}
-
 // Pushes any new changes to GitBook and creates a version tag for the new version
 task pushReleaseDocs(type: GitbookPush, dependsOn: [':docs:buildSite']) {
     username project.hasProperty("gitbookUsername") ? gitbookUsername : null
@@ -123,12 +102,12 @@ task pushReleaseDocs(type: GitbookPush, dependsOn: [':docs:buildSite']) {
 task createVersionTask(type: VersionCommitTask, dependsOn: [':meta:update'])
 
 // The real power of this task comes from its dependencies
-task release(dependsOn: [clean, check, createVersionTask, pushReleaseDocs, bintrayUpload])
+task release(dependsOn: [clean, check, createVersionTask, pushReleaseDocs])
 
 if (!hasProperty("authorizeRelease") || property("authorizeRelease") != project.version) {
     // Disable the release tasks unless authorizeRelease contains the correct string
     def val = hasProperty("authorizeRelease") ? property("authorizeRelease") : "(missing)"
-    [release, createVersionTask, pushReleaseDocs, bintrayUpload]*.enabled = false
+    [release, createVersionTask, pushReleaseDocs]*.enabled = false
     println("Release disabled, expected property 'authorizeRelease' to equal ${project.version}, was ${val}")
 }
 
