@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import net.dean.jraw.models.DistinguishedStatus
-import net.dean.jraw.models.VoteDirection
+import net.dean.jraw.models.VoteState
 
 /**
  * A NullAwareEnumAdapter is a special JsonAdapter for enums that represent exactly one of its values in JSON as null.
@@ -45,18 +45,23 @@ sealed class NullAwareEnumAdapter<T : Enum<T>> : JsonAdapter<T>() {
  * Handles reading and writing VoteDirections. reddit represents an upvote with "true", a downvote with "false", and no
  * vote with a null value.
  */
-class VoteDirectionAdapter : NullAwareEnumAdapter<VoteDirection>() {
-    override val nullValue: VoteDirection = VoteDirection.NONE
-
-    override fun read(reader: JsonReader): VoteDirection {
-        return if (reader.nextBoolean()) VoteDirection.UP else VoteDirection.DOWN
+class VoteDirectionAdapter : JsonAdapter<VoteState>() {
+    override fun fromJson(reader: JsonReader): VoteState {
+        return when (reader.nextInt()) {
+            3 -> VoteState(interesting = true, funny = true)
+            4 -> VoteState(interesting = true, funny = false)
+            5 -> VoteState(interesting = false, funny = true)
+            6 -> VoteState(interesting = false, funny = false)
+            else -> error("this should never happen")
+        }
     }
 
-    override fun write(writer: JsonWriter, value: VoteDirection) {
+    override fun toJson(writer: JsonWriter, value: VoteState?) {
         when (value) {
-            VoteDirection.UP -> writer.value(true)
-            VoteDirection.DOWN -> writer.value(false)
-            else -> throw IllegalStateException("Unknown vote direction: $value")
+            VoteState(interesting = true, funny = true) -> writer.value(3L)
+            VoteState(interesting = true, funny = false) -> writer.value(4L)
+            VoteState(interesting = false, funny = true) -> writer.value(5L)
+            VoteState(interesting = false, funny = false), null -> writer.value(6L)
         }
     }
 }

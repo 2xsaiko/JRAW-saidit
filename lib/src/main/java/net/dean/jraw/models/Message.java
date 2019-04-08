@@ -1,5 +1,8 @@
 package net.dean.jraw.models;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -9,9 +12,6 @@ import net.dean.jraw.databind.RedditModel;
 import net.dean.jraw.databind.UnixTime;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.Serializable;
-import java.util.Date;
 
 @AutoValue
 @RedditModel
@@ -76,7 +76,7 @@ public abstract class Message implements Created, Distinguishable, Identifiable,
 
     @NotNull
     @Override
-    @Json(name = "likes") public abstract VoteDirection getVote();
+    @Json(name = "likes") public abstract VoteState getVote();
 
     public static JsonAdapter<Message> jsonAdapter(Moshi moshi) {
         return new AutoValue_Message.MoshiJsonAdapter(moshi);

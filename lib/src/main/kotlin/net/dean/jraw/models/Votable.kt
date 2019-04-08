@@ -5,7 +5,7 @@ package net.dean.jraw.models
  */
 interface Votable {
     /** How the logged-in user voted on the model */
-    val vote: VoteDirection
+    val vote: VoteState
 
     /** Upvotes minus downvotes */
     val score: Int

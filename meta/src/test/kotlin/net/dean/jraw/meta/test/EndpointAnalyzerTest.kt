@@ -32,14 +32,14 @@ class EndpointAnalyzerTest : Spek({
                 endpoint.oauthScope.should.match(Regex("[a-z]+"))
 
                 // http://regexr.com/3g4ap
-                endpoint.redditDocLink.should.match(Regex("https://www\\.reddit\\.com/dev/api/oauth#[A-Z]+_[0-9a-z_{}:.]+"))
+                endpoint.redditDocLink.should.match(Regex("https://www\\.saidit\\.net/dev/api/oauth#[A-Z]+_[0-9a-z_{}:.]+"))
             }
         }
 
         it("should turn colon path parameters into path bracket parameters") {
-            // For example:   /api/mod/conversations/:conversation_id/archive
-            // should become: /api/mod/conversations/{conversation_id}/archive
-            overview.endpoints.firstOrNull { it.path == "/api/mod/conversations/{conversation_id}/archive" }.should.not.equal(null)
+            // For example:   /user/:username/about
+            // should become: /user/{username}/about
+            overview.endpoints.firstOrNull { it.path == "/user/{username}/about" }.should.not.equal(null)
         }
 
         fun ensureFound(path: String) {
@@ -57,10 +57,11 @@ class EndpointAnalyzerTest : Spek({
             ensureFound("/api/read_all_messages")
         }
 
-        it("should only replace the proper instance of the path parameter keyword") {
-            // Instead of /api/live/{thread}/close_{thread}
-            ensureFound("/api/live/{thread}/close_thread")
-        }
+        // TODO is there an example of this in saidit's API?
+        // it("should only replace the proper instance of the path parameter keyword") {
+        //     // Instead of /api/live/{thread}/close_{thread}
+        //     ensureFound("/api/live/{thread}/close_thread")
+        // }
     }
 
     describe("implDetails") {

@@ -1,5 +1,8 @@
 package net.dean.jraw.models;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -10,9 +13,6 @@ import net.dean.jraw.databind.UnixTime;
 import net.dean.jraw.references.SubmissionReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.Serializable;
-import java.util.Date;
 
 @AutoValue
 @RedditModel
@@ -169,7 +169,7 @@ public abstract class Submission implements PublicContribution<SubmissionReferen
 
     @Override
     @NotNull
-    @Json(name = "likes") public abstract VoteDirection getVote();
+    @Json(name = "likes") public abstract VoteState getVote();
 
     /** The number of comments posted in this post. Includes removed comments. */
     @Json(name = "num_comments") public abstract Integer getCommentCount();

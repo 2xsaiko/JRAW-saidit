@@ -1,10 +1,14 @@
 package net.dean.jraw.references
 
-import net.dean.jraw.*
+import net.dean.jraw.ApiException
+import net.dean.jraw.Endpoint
+import net.dean.jraw.EndpointImplementation
+import net.dean.jraw.JrawUtils
+import net.dean.jraw.RedditClient
 import net.dean.jraw.databind.Enveloped
 import net.dean.jraw.models.Comment
 import net.dean.jraw.models.DistinguishedStatus
-import net.dean.jraw.models.VoteDirection
+import net.dean.jraw.models.VoteState
 
 /**
  * Base class for References that can be publicly voted upon and saved (in essence, Submissions and Comments).
@@ -23,14 +27,20 @@ abstract class PublicContributionReference internal constructor(reddit: RedditCl
      */
     val fullName = "${kindPrefix}_$id"
 
-    /** Equivalent to `setVote(VoteDirection.UP)` */
-    fun upvote() { setVote(VoteDirection.UP) }
+    /** Equivalent to `setInterestingVote` */
+    fun voteInteresting() { setInterestingVote(true) }
 
-    /** Equivalent to `setVote(VoteDirection.DOWN)` */
-    fun downvote() { setVote(VoteDirection.DOWN) }
+    /** Equivalent to `setFunnyVote` */
+    fun voteFunny() { setFunnyVote(true) }
 
-    /** Equivalent to `setVote(VoteDirection.NONE)` */
-    fun unvote() { setVote(VoteDirection.NONE) }
+    /** Equivalent to `setInterestingVote` */
+    fun unvoteInteresting() { setInterestingVote(false) }
+
+    /** Equivalent to `setFunnyVote` */
+    fun unvoteFunny() { setFunnyVote(false) }
+
+    /** Equivalent to `setVote(VoteDirection(interesting = false, funny = false))` */
+    fun unvote() { setVote(VoteState(interesting = false, funny = false)) }
 
     /**
      * Votes on a model on behalf of the user.
@@ -43,11 +53,30 @@ abstract class PublicContributionReference internal constructor(reddit: RedditCl
      * reddit responds with an HTTP 400 if the post is too old to be voted on.
      */
     @EndpointImplementation(Endpoint.POST_VOTE)
-    fun setVote(dir: VoteDirection) {
-        val value = when (dir) {
-            VoteDirection.UP -> 1
-            VoteDirection.NONE -> 0
-            VoteDirection.DOWN -> -1
+    fun setVote(dir: VoteState) {
+        setInterestingVote(dir.interesting)
+        setFunnyVote(dir.funny)
+    }
+
+    @EndpointImplementation(Endpoint.POST_VOTE)
+    fun setInterestingVote(on:Boolean) {
+        val value = when(on) {
+            true -> 1
+            false -> 11
+        }
+        reddit.request {
+            it.endpoint(Endpoint.POST_VOTE).post(mapOf(
+                "dir" to value.toString(),
+                "id" to fullName
+            ))
+        }
+    }
+
+    @EndpointImplementation(Endpoint.POST_VOTE)
+    fun setFunnyVote(on:Boolean) {
+        val value = when(on) {
+            true -> -1
+            false -> -11
         }
         reddit.request {
             it.endpoint(Endpoint.POST_VOTE).post(mapOf(

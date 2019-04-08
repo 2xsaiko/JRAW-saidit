@@ -5,7 +5,7 @@ import net.dean.jraw.models.CommentSort
 import net.dean.jraw.models.DistinguishedStatus
 import net.dean.jraw.models.KindConstants
 import net.dean.jraw.models.SubredditSort
-import net.dean.jraw.models.VoteDirection
+import net.dean.jraw.models.VoteState
 import net.dean.jraw.references.CommentsRequest
 import net.dean.jraw.references.SubmissionReference
 import net.dean.jraw.test.CredentialsUtil.moderationSubreddit
@@ -35,18 +35,18 @@ class SubmissionReferenceTest : Spek({
                 .first()
                 .toReference(reddit)
 
-            fun expectVote(dir: VoteDirection) {
+            fun expectVote(dir: VoteState) {
                 voteRef.inspect().vote.should.equal(dir)
             }
 
-            voteRef.upvote()
-            expectVote(VoteDirection.UP)
+            voteRef.voteInteresting()
+            expectVote(VoteState(interesting = true, funny = false))
 
-            voteRef.downvote()
-            expectVote(VoteDirection.DOWN)
+            voteRef.voteFunny()
+            expectVote(VoteState(interesting = true, funny = true))
 
             voteRef.unvote()
-            expectVote(VoteDirection.NONE)
+            expectVote(VoteState(interesting = false, funny = false))
         }
     }
 

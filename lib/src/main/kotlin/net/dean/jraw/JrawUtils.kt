@@ -24,7 +24,7 @@ import net.dean.jraw.models.MoreChildren
 import net.dean.jraw.models.Submission
 import net.dean.jraw.models.Subreddit
 import net.dean.jraw.models.Trophy
-import net.dean.jraw.models.VoteDirection
+import net.dean.jraw.models.VoteState
 import net.dean.jraw.models.WikiPage
 import net.dean.jraw.models.internal.LabeledMultiDescription
 import net.dean.jraw.models.internal.TrophyList
@@ -59,7 +59,7 @@ object JrawUtils {
         )))
         .add(ModelAdapterFactory.create())
         .add(DistinguishedStatus::class.java, DistinguishedStatusAdapter())
-        .add(VoteDirection::class.java, VoteDirectionAdapter())
+        .add(VoteState::class.java, VoteDirectionAdapter())
         .add(RedditExceptionStubAdapterFactory())
         .add(LiveWebSocketUpdateAdapterFactory())
         .build()

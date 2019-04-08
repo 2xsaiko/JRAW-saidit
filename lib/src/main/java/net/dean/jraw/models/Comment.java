@@ -1,5 +1,8 @@
 package net.dean.jraw.models;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import com.google.auto.value.AutoValue;
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -11,9 +14,6 @@ import net.dean.jraw.databind.UnixTime;
 import net.dean.jraw.references.CommentReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.Serializable;
-import java.util.Date;
 
 @AutoValue
 @RedditModel
@@ -93,7 +93,7 @@ public abstract class Comment implements PublicContribution<CommentReference>, N
 
     @NotNull
     @Override
-    @Json(name = "likes") public abstract VoteDirection getVote();
+    @Json(name = "likes") public abstract VoteState getVote();
 
     /** Number of Silver, Gold and Platinum coins */
     @NotNull
