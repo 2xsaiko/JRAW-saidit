@@ -305,7 +305,7 @@ public class RedditClient extends RestClient {
 
 
         RestResponse response = execute(request()
-                .path(String.format("/comments/%s", request.getId()))
+                .path(String.format("/comments/%s.json", request.getId()))
                 .query(args)
                 .build());
         return SubmissionSerializer.withComments(response.getJson(), sort);
@@ -356,7 +356,7 @@ public class RedditClient extends RestClient {
      */
     @EndpointImplementation(Endpoints.RANDOM)
     public Submission getRandomSubmission(String subreddit) throws NetworkException  {
-        String path = JrawUtils.getSubredditPath(subreddit, "/random");
+        String path = JrawUtils.getSubredditPath(subreddit, "/random") + ".json";
 
         // Favor path() instead of endpoint() because we have already decided the path above
         RestResponse response = execute(request()

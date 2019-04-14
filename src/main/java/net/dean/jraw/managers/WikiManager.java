@@ -1,20 +1,20 @@
 package net.dean.jraw.managers;
 
-import net.dean.jraw.ApiException;
-import net.dean.jraw.EndpointImplementation;
-import net.dean.jraw.Endpoints;
-import net.dean.jraw.http.RestResponse;
-import net.dean.jraw.util.JrawUtils;
-import net.dean.jraw.RedditClient;
-import net.dean.jraw.http.NetworkException;
-import net.dean.jraw.http.HttpRequest;
-import net.dean.jraw.models.WikiPage;
-import net.dean.jraw.models.WikiPageSettings;
-import com.fasterxml.jackson.databind.JsonNode;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import net.dean.jraw.ApiException;
+import net.dean.jraw.EndpointImplementation;
+import net.dean.jraw.Endpoints;
+import net.dean.jraw.RedditClient;
+import net.dean.jraw.http.HttpRequest;
+import net.dean.jraw.http.NetworkException;
+import net.dean.jraw.http.RestResponse;
+import net.dean.jraw.models.WikiPage;
+import net.dean.jraw.models.WikiPageSettings;
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * This class is responsible for managing a wiki
@@ -47,7 +47,7 @@ public class WikiManager extends AbstractManager {
      */
     @EndpointImplementation(Endpoints.WIKI_PAGES)
     public List<String> getPages(String subreddit) throws NetworkException {
-        String path = JrawUtils.getSubredditPath(subreddit, "/wiki/pages");
+        String path = JrawUtils.getSubredditPath(subreddit, "/wiki/pages") + ".json";
 
         List<String> pages = new ArrayList<>();
         JsonNode pagesNode = reddit.execute(reddit.request()
@@ -85,7 +85,7 @@ public class WikiManager extends AbstractManager {
      */
     @EndpointImplementation(Endpoints.WIKI_PAGE)
     public WikiPage get(String subreddit, String page) throws NetworkException {
-        String path = JrawUtils.getSubredditPath(subreddit, "/wiki/" + page);
+        String path = JrawUtils.getSubredditPath(subreddit, "/wiki/" + page) + ".json";
 
         HttpRequest r = reddit.request()
                 .path(path)
@@ -144,7 +144,7 @@ public class WikiManager extends AbstractManager {
      */
     @EndpointImplementation(Endpoints.WIKI_SETTINGS_PAGE_GET)
     public WikiPageSettings getSettings(String subreddit, String page) throws NetworkException {
-        String path = JrawUtils.getSubredditPath(subreddit, "/wiki/settings/" + page);
+        String path = JrawUtils.getSubredditPath(subreddit, "/wiki/settings/" + page) + ".json";
 
         return reddit.execute(reddit.request()
                 .path(path)
