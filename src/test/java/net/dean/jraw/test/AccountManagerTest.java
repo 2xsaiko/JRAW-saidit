@@ -1,11 +1,14 @@
 package net.dean.jraw.test;
 
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+
 import net.dean.jraw.AccountPreferencesEditor;
 import net.dean.jraw.ApiException;
-import net.dean.jraw.managers.CaptchaHelper;
-import net.dean.jraw.util.JrawUtils;
 import net.dean.jraw.http.NetworkException;
 import net.dean.jraw.managers.AccountManager;
+import net.dean.jraw.managers.CaptchaHelper;
 import net.dean.jraw.models.AccountPreferences;
 import net.dean.jraw.models.Comment;
 import net.dean.jraw.models.CommentNode;
@@ -16,20 +19,21 @@ import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.models.Subreddit;
 import net.dean.jraw.models.UserRecord;
-import net.dean.jraw.models.VoteDirection;
+import net.dean.jraw.models.VoteState;
 import net.dean.jraw.paginators.ImportantUserPaginator;
 import net.dean.jraw.paginators.Paginator;
 import net.dean.jraw.paginators.SubredditPaginator;
 import net.dean.jraw.paginators.UserContributionPaginator;
 import net.dean.jraw.paginators.UserSubredditsPaginator;
+import net.dean.jraw.util.JrawUtils;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 /**
  * This class tests methods that require authentication, such as voting, saving, hiding, and posting.
@@ -219,7 +223,7 @@ public class AccountManagerTest extends RedditTest {
             Submission submission = reddit.getSubmission(submissionId);
 
             // Figure out a new vote direction: up if there is no vote, no vote if upvoted
-            VoteDirection newVoteDirection = submission.getVote() == VoteDirection.NO_VOTE ? VoteDirection.UPVOTE : VoteDirection.NO_VOTE;
+            VoteState newVoteDirection = submission.getVote() == VoteState.none() ? VoteState.of(true, false) : VoteState.none();
             account.vote(submission, newVoteDirection);
 
             submission = reddit.getSubmission(submissionId);

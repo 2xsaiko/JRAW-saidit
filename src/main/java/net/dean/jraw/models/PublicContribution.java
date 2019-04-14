@@ -1,5 +1,9 @@
 package net.dean.jraw.models;
 
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import net.dean.jraw.models.attr.Distinguishable;
 import net.dean.jraw.models.attr.Gildable;
@@ -7,10 +11,6 @@ import net.dean.jraw.models.attr.Votable;
 import net.dean.jraw.models.meta.ContributionSerializer;
 import net.dean.jraw.models.meta.JsonProperty;
 import net.dean.jraw.models.meta.Model;
-
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class is used to separate public contributions (submissions and comments) from private contributions (messages)
@@ -85,7 +85,7 @@ public abstract class PublicContribution extends Contribution implements Disting
     }
 
     @Override
-    public VoteDirection getVote() {
+    public VoteState getVote() {
         return _getVote();
     }
 

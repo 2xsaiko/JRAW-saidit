@@ -28,7 +28,7 @@ import net.dean.jraw.models.Submission;
 import net.dean.jraw.models.Subreddit;
 import net.dean.jraw.models.Thing;
 import net.dean.jraw.models.UserRecord;
-import net.dean.jraw.models.VoteDirection;
+import net.dean.jraw.models.VoteState;
 import net.dean.jraw.models.attr.Votable;
 import net.dean.jraw.util.JrawUtils;
 
@@ -132,14 +132,51 @@ public class AccountManager extends AbstractManager {
      * @throws ApiException     If the API returned an error
      */
     @EndpointImplementation(Endpoints.VOTE)
-    public <T extends Thing & Votable> void vote(T s, VoteDirection voteDirection) throws NetworkException, ApiException {
+    public <T extends Thing & Votable> void voteInsightful(T s, boolean voteDirection) throws NetworkException, ApiException {
         genericPost(reddit.request()
                 .endpoint(Endpoints.VOTE)
                 .post(JrawUtils.mapOf(
                         "api_type", "json",
-                        "dir", voteDirection.getValue(),
+                        "dir", voteDirection ? 1 : 11,
                         "id", s.getFullName())
                 ).build());
+    }
+
+    /**
+     * Votes on a comment or submission. Please note that "API clients proxying a human's action one-for-one are OK, but
+     * bots deciding how to vote on content or amplifying a human's vote are not".
+     *
+     * @param s             The submission to vote on
+     * @param voteDirection How to vote
+     * @param <T>           The Votable Thing to vote on
+     * @throws NetworkException If the request was not successful
+     * @throws ApiException     If the API returned an error
+     */
+    @EndpointImplementation(Endpoints.VOTE)
+    public <T extends Thing & Votable> void voteFun(T s, boolean voteDirection) throws NetworkException, ApiException {
+        genericPost(reddit.request()
+            .endpoint(Endpoints.VOTE)
+            .post(JrawUtils.mapOf(
+                "api_type", "json",
+                "dir", voteDirection ? -1 : -11,
+                "id", s.getFullName())
+            ).build());
+    }
+
+    /**
+     * Votes on a comment or submission. Please note that "API clients proxying a human's action one-for-one are OK, but
+     * bots deciding how to vote on content or amplifying a human's vote are not".
+     *
+     * @param s             The submission to vote on
+     * @param voteState How to vote
+     * @param <T>           The Votable Thing to vote on
+     * @throws NetworkException If the request was not successful
+     * @throws ApiException     If the API returned an error
+     */
+    @EndpointImplementation(Endpoints.VOTE)
+    public <T extends Thing & Votable> void vote(T s, VoteState voteState) throws NetworkException, ApiException {
+        voteInsightful(s, voteState.insightful);
+        voteFun(s, voteState.fun);
     }
 
     /**

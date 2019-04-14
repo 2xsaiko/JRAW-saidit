@@ -98,12 +98,21 @@ public final class Submission extends PublicContribution {
     }
 
     /**
-     * Gets the ratio of upvotes to downvotes
-     * @return Gets the ratio of upvotes to downvotes
+     * Gets the amount of 'insightful' votes
+     * @return Gets the amount of 'insightful' votes
      */
     @JsonProperty
-    public Double getUpvoteRatio() {
-        return data("upvote_ratio", Double.class);
+    public Integer getInsightfulCount() {
+        return data("ups", Integer.class);
+    }
+
+    /**
+     * Gets the amount of 'fun' votes
+     * @return Gets the amount of 'fun' votes
+     */
+    @JsonProperty
+    public Integer getFunCount() {
+        return data("downs", Integer.class);
     }
 
     /**
@@ -397,7 +406,7 @@ public final class Submission extends PublicContribution {
     }
 
     @Override
-    public VoteDirection getVote() {
+    public VoteState getVote() {
         return _getVote();
     }
 

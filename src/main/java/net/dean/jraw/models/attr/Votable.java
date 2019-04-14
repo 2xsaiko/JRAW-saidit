@@ -1,13 +1,13 @@
 package net.dean.jraw.models.attr;
 
 import net.dean.jraw.models.Thing;
-import net.dean.jraw.models.VoteDirection;
+import net.dean.jraw.models.VoteState;
 import net.dean.jraw.models.meta.JsonProperty;
 
 /**
  * Indicates that this model can be voted on
  *
- * @see net.dean.jraw.managers.AccountManager#vote(Thing, VoteDirection)
+ * @see net.dean.jraw.managers.AccountManager#vote(Thing, VoteState)
  */
 public interface Votable extends JsonAttribute {
     /**
@@ -21,10 +21,10 @@ public interface Votable extends JsonAttribute {
 
     /**
      * Gets the way in which the logged in user voted. If there is none,
-     * {@link net.dean.jraw.models.VoteDirection#NO_VOTE} will be returned.
+     * {@link net.dean.jraw.models.VoteState#none()} will be returned.
      *
      * @return The way in which the logged in user voted
      */
     @JsonProperty
-    VoteDirection getVote();
+    VoteState getVote();
 }

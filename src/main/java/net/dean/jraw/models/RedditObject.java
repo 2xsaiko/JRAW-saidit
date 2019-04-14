@@ -1,9 +1,9 @@
 package net.dean.jraw.models;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import net.dean.jraw.util.Dimension;
-
-import java.util.Date;
 
 /**
  * A RedditObject represents an abstract data structure presented by the reddit API. Its most notable subclass is
@@ -68,13 +68,13 @@ public abstract class RedditObject extends JsonModel {
         return getDataNode().get("score").intValue();
     }
 
-    protected final VoteDirection _getVote() {
+    protected final VoteState _getVote() {
         JsonNode likes = getDataNode().get("likes");
-        if (likes.isNull()) {
-            return VoteDirection.NO_VOTE;
-        }
+        boolean likesState = !likes.isNull() && likes.booleanValue();
+        JsonNode dislikes = getDataNode().get("dislikes");
+        boolean dislikesState = !dislikes.isNull() && dislikes.booleanValue();
 
-        return likes.booleanValue() ? VoteDirection.UPVOTE : VoteDirection.DOWNVOTE;
+        return VoteState.of(likesState, dislikesState);
     }
 
     protected final Dimension _getDimension(String jsonKey) {
