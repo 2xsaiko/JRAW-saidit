@@ -73,18 +73,18 @@ javadoc {
     title = "${project.name} $version API"
 }
 
-test {
-    useTestNG()
-
-    testLogging {
-        // Show stderr and stdout (useful for exceptions)
-        showStandardStreams = true
-    }
-
-    beforeTest { descriptor ->
-        logger.lifecycle("Running test: ${descriptor.className}.${descriptor.name}")
-    }
-}
+// test {
+//     useTestNG()
+//
+//     testLogging {
+//         // Show stderr and stdout (useful for exceptions)
+//         showStandardStreams = true
+//     }
+//
+//     beforeTest { descriptor ->
+//         logger.lifecycle("Running test: ${descriptor.className}.${descriptor.name}")
+//     }
+// }
 
 jacocoTestReport {
     reports {
@@ -93,7 +93,7 @@ jacocoTestReport {
     }
 }
 
-defaultTasks "test"
+// defaultTasks "test"
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.13'
