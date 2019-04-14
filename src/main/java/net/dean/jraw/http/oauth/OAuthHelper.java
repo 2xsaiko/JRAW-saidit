@@ -1,23 +1,22 @@
 package net.dean.jraw.http.oauth;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.net.MediaType;
-import net.dean.jraw.RedditClient;
-import net.dean.jraw.http.*;
-import net.dean.jraw.models.JsonModel;
-import net.dean.jraw.util.JrawUtils;
-
 import java.math.BigInteger;
 import java.net.URL;
 import java.security.SecureRandom;
-import com.google.common.net.MediaType;
-
-import net.dean.jraw.http.*;
-import net.dean.jraw.models.JsonModel;
-
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.net.MediaType;
+import net.dean.jraw.RedditClient;
+import net.dean.jraw.http.AuthenticationMethod;
+import net.dean.jraw.http.BasicAuthData;
+import net.dean.jraw.http.HttpRequest;
+import net.dean.jraw.http.MediaTypes;
+import net.dean.jraw.http.NetworkException;
+import net.dean.jraw.http.RestResponse;
+import net.dean.jraw.models.JsonModel;
+import net.dean.jraw.util.JrawUtils;
 
 
 
@@ -43,7 +42,7 @@ import java.util.Map;
  *
  */
 public class OAuthHelper {
-    private static final String GRANT_TYPE = "https://oauth.reddit.com/grants/installed_client";
+    private static final String GRANT_TYPE = "https://oauth.saidit.net/grants/installed_client";
     private AuthStatus authStatus;
     private String refreshToken;
     private SecureRandom secureRandom;
@@ -67,7 +66,7 @@ public class OAuthHelper {
      * @param permanent Whether or not to request a refresh token which can be exchanged for an additional authorization
      *                  token in the future.
      * @param scopes    OAuth scopes to be requested. A full list of scopes can be found
-     *                  <a href="https://www.reddit.com/dev/api/oauth">here</a>.
+     *                  <a href="https://www.saidit.net/dev/api/oauth">here</a>.
      * @return The URL clients are sent to in order to authorize themselves
      */
     public URL getAuthorizationUrl(Credentials creds, boolean permanent, String... scopes) {
@@ -83,7 +82,7 @@ public class OAuthHelper {
      * @param useMobileSite Wether or not to return the mobile friendly auth page, which is
      *                      designed for small screens
      * @param scopes        OAuth scopes to be requested. A full list of scopes can be found
-     *                      <a href="https://www.reddit.com/dev/api/oauth">here</a>.
+     *                      <a href="https://www.saidit.net/dev/api/oauth">here</a>.
      * @return The URL clients are sent to in order to authorize themselves
      */
     public URL getAuthorizationUrl(Credentials creds, boolean permanent, boolean useMobileSite, String... scopes) {
@@ -253,7 +252,7 @@ public class OAuthHelper {
     /**
      * Authenticates using application-only OAuth2 (in a user-less context).
      *
-     * @param credentials The app's credentials. The authentication method must be
+     * @param creds The app's credentials. The authentication method must be
      *                    {@link AuthenticationMethod#isUserless() user-less}.
      * @return The data returned from the authorization request
      * @throws NetworkException If the request was not successful

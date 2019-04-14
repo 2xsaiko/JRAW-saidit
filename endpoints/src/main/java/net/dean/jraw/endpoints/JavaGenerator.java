@@ -1,7 +1,5 @@
 package net.dean.jraw.endpoints;
 
-import net.dean.jraw.Endpoint;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
+
+import net.dean.jraw.Endpoint;
 
 /**
  * This class generates an enum called Endpoints.java.
@@ -214,7 +214,7 @@ public class JavaGenerator extends AbstractEndpointGenerator {
         // Put in order of priority
         PREFIX_SUBSTITUTIONS.put("/api/v1", "OAUTH");
         PREFIX_SUBSTITUTIONS.put("/api/", "");
-        PREFIX_SUBSTITUTIONS.put("/r/", "");
+        PREFIX_SUBSTITUTIONS.put("/s/", "");
         PREFIX_SUBSTITUTIONS.put("/", "");
 
         POSTFIX_SUBSTITUTIONS = new LinkedHashMap<>();

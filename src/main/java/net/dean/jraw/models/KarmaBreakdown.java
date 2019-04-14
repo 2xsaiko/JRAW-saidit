@@ -1,12 +1,12 @@
 package net.dean.jraw.models;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableMap;
 import net.dean.jraw.managers.AccountManager;
 import net.dean.jraw.models.meta.JsonProperty;
 import net.dean.jraw.models.meta.Model;
-
-import java.util.Map;
 
 /**
  * Represents a breakdown of link and comment karma by subreddit.
@@ -54,7 +54,7 @@ public final class KarmaBreakdown extends RedditObject {
     private SubredditKarma getNotNullSubredditKarma(String subreddit) {
         SubredditKarma karma = summaries.get(subreddit);
         if (karma == null)
-            throw new IllegalArgumentException("No karma in /r/" + subreddit);
+            throw new IllegalArgumentException("No karma in /s/" + subreddit);
         return karma;
     }
 

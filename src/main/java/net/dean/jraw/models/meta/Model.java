@@ -1,29 +1,27 @@
 package net.dean.jraw.models.meta;
 
-import net.dean.jraw.util.NoSuchEnumConstantException;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import net.dean.jraw.models.Account;
-import net.dean.jraw.models.Trophy;
 import net.dean.jraw.models.Comment;
 import net.dean.jraw.models.JsonModel;
 import net.dean.jraw.models.KarmaBreakdown;
 import net.dean.jraw.models.Listing;
-import net.dean.jraw.models.LiveThread;
-import net.dean.jraw.models.LiveUpdate;
 import net.dean.jraw.models.Message;
 import net.dean.jraw.models.ModAction;
 import net.dean.jraw.models.MoreChildren;
 import net.dean.jraw.models.MultiReddit;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.models.Subreddit;
+import net.dean.jraw.models.Trophy;
 import net.dean.jraw.models.WikiPage;
 import net.dean.jraw.models.WikiPageSettings;
-import com.fasterxml.jackson.databind.JsonNode;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import net.dean.jraw.util.NoSuchEnumConstantException;
 
 /**
  * This annotation is used to verify that the correct data is being mapped to the correct object. This is accomplished
@@ -91,10 +89,6 @@ public @interface Model {
         WIKI_PAGE("wikipage", WikiPage.class),
         /** Represents a wiki page's settings */
         WIKI_PAGE_SETTINGS("wikipagesettings", WikiPageSettings.class),
-        /** Represents a live thread */
-        LIVE_THREAD("LiveUpdateEvent", LiveThread.class),
-        /** Represents an update in a live thread */
-        LIVE_UPDATE("LiveUpdate", LiveUpdate.class),
         /** Represents a breakdown of karma by subreddit */
         KARMA_BREAKDOWN("KarmaList", KarmaBreakdown.class),
         /** Represents an administrative action on behalf of a moderator of a subreddit */

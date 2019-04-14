@@ -1,11 +1,5 @@
 package net.dean.jraw.endpoints;
 
-import javassist.ClassPool;
-import javassist.CtMethod;
-import javassist.NotFoundException;
-import net.dean.jraw.Endpoint;
-import net.dean.jraw.util.JrawUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -13,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NavigableMap;
 import java.util.TreeMap;
+
+import javassist.ClassPool;
+import javassist.CtMethod;
+import javassist.NotFoundException;
+import net.dean.jraw.Endpoint;
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * This class provides a template for a class that generates a file based off of {@link Endpoint} objects.
@@ -100,7 +100,7 @@ public abstract class AbstractEndpointGenerator {
     protected String getRedditDocUrl(Endpoint endpoint) {
         String ref = JrawUtils.urlEncode(endpoint.getVerb() + endpoint.getUri().replace('/', '_'));
 
-        String base = "https://www.reddit.com/dev/api";
+        String base = "https://www.saidit.net/dev/api";
         if (!endpoint.getScope().equals("(not available through oauth)")) {
             base += "/oauth";
         }

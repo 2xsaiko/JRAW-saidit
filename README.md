@@ -1,6 +1,6 @@
 #Java Reddit API Wrapper
 
-[![travis-ci build status](https://img.shields.io/travis/thatJavaNerd/JRAW.svg)](https://travis-ci.org/thatJavaNerd/JRAW) [![Coverage Status](https://img.shields.io/coveralls/thatJavaNerd/JRAW.svg)](https://coveralls.io/r/thatJavaNerd/JRAW) [![reddit API coverage](https://img.shields.io/badge/api--coverage-71%-blue.svg)](https://github.com/thatJavaNerd/JRAW/blob/master/ENDPOINTS.md) [![Latest release](https://img.shields.io/github/release/thatJavaNerd/JRAW.svg)](https://bintray.com/thatjavanerd/maven/JRAW/_latestVersion)
+[![travis-ci build status](https://img.shields.io/travis/thatJavaNerd/JRAW.svg)](https://travis-ci.org/thatJavaNerd/JRAW) [![Coverage Status](https://img.shields.io/coveralls/thatJavaNerd/JRAW.svg)](https://coveralls.io/r/thatJavaNerd/JRAW) [![reddit API coverage](https://img.shields.io/badge/api--coverage-73%-blue.svg)](https://github.com/thatJavaNerd/JRAW/blob/master/ENDPOINTS.md) [![Latest release](https://img.shields.io/github/release/thatJavaNerd/JRAW.svg)](https://bintray.com/thatjavanerd/maven/JRAW/_latestVersion)
 
 >JRAW is currently in an experimental stage, and therefore subject to breaking API changes that could occur at any time.
 
@@ -31,7 +31,7 @@ Before contributing, it is recommended that you have a decent knowledge of how t
 Some references:
  - [reddit/reddit's 'API' wiki page](https://github.com/reddit/reddit/wiki/API): Quick overview of the API and its rules
  - [reddit/reddit's 'JSON' wiki page](https://github.com/reddit/reddit/wiki/JSON): Shows the data structure of the objects returned by the API
- - And of course, don't forget the [official reddit API documentation](https://www.reddit.com/dev/api/oauth)
+ - And of course, don't forget the [official saidit API documentation](https://www.saidit.net/dev/api/oauth)
 
 ####Want to contribute? Follow these steps:
 
@@ -48,8 +48,8 @@ Some references:
 Here's how to create a testing user:
 
 1. Register a new user
-2. [Create an OAuth2 app](https://www.reddit.com/prefs/apps)
+2. [Create an OAuth2 app](https://www.saidit.net/prefs/apps)
 3. Record the username, password, client ID, and client secret in `src/test/java/resources/credentials.json`
-4. [Create a subreddit](https://www.reddit.com/subreddits/create)
+4. [Create a subreddit](https://www.saidit.net/subs/create)
 5. [Create a multireddit](http://www.redditblog.com/2013/06/browse-future-of-reddit-re-introducing.html)
 6. [Submit a self post to /r/jraw_testing2](https://www.reddit.com/r/jraw_testing2/submit?selftext=true)

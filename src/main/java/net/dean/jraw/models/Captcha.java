@@ -1,8 +1,8 @@
 package net.dean.jraw.models;
 
-import net.dean.jraw.util.JrawUtils;
-
 import java.net.URL;
+
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * Represents a CAPTCHA(an acronym for "Completely Automated Public Turing test to tell Computers and Humans Apart").
@@ -20,7 +20,7 @@ public final class Captcha {
      */
     public Captcha(String id) {
         this.id = id;
-        this.imageUrl = JrawUtils.newUrl("https://www.reddit.com/captcha/" + JrawUtils.urlEncode(id) + ".png");
+        this.imageUrl = JrawUtils.newUrl("https://www.saidit.net/captcha/" + JrawUtils.urlEncode(id) + ".png");
     }
 
     /**
@@ -33,7 +33,7 @@ public final class Captcha {
     }
 
     /**
-     * Gets the URL to this Captcha's image. The format of the URL is {@code http://reddit.com/captcha/{id}.png}
+     * Gets the URL to this Captcha's image. The format of the URL is {@code http://saidit.net/captcha/{id}.png}
      * @return The URL to this Captcha's image
      */
     public URL getImageUrl() {

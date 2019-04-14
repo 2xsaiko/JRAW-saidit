@@ -1,7 +1,11 @@
 package net.dean.jraw.fluent;
 
 import net.dean.jraw.RedditClient;
-import net.dean.jraw.managers.*;
+import net.dean.jraw.managers.AccountManager;
+import net.dean.jraw.managers.InboxManager;
+import net.dean.jraw.managers.ModerationManager;
+import net.dean.jraw.managers.MultiRedditManager;
+import net.dean.jraw.managers.WikiManager;
 
 /**
  * This class is a collection of managers pulled from the {@link net.dean.jraw.managers} package.
@@ -10,7 +14,6 @@ public final class ManagerAggregation {
     private final RedditClient reddit;
     private final AccountManager account;
     private final InboxManager inbox;
-    private final LiveThreadManager liveThread;
     private final ModerationManager moderation;
     private final MultiRedditManager multis;
     private final WikiManager wikis;
@@ -26,7 +29,6 @@ public final class ManagerAggregation {
                 reddit,
                 new AccountManager(reddit),
                 new InboxManager(reddit),
-                new LiveThreadManager(reddit),
                 new ModerationManager(reddit),
                 new MultiRedditManager(reddit),
                 new WikiManager(reddit)
@@ -34,11 +36,10 @@ public final class ManagerAggregation {
     }
 
     public ManagerAggregation(RedditClient reddit, AccountManager account, InboxManager inbox,
-                              LiveThreadManager liveThread, ModerationManager moderation, MultiRedditManager multis,
+                              ModerationManager moderation, MultiRedditManager multis,
                               WikiManager wikis) {
         if (reddit == null ||
                 account == null ||
-                liveThread == null ||
                 moderation == null ||
                 multis == null ||
                 wikis == null ||
@@ -47,7 +48,6 @@ public final class ManagerAggregation {
         this.reddit = reddit;
         this.account = account;
         this.inbox = inbox;
-        this.liveThread = liveThread;
         this.moderation = moderation;
         this.multis = multis;
         this.wikis = wikis;
@@ -57,7 +57,6 @@ public final class ManagerAggregation {
 
     public AccountManager account() { return account; }
     public InboxManager inbox() { return inbox; }
-    public LiveThreadManager liveThreads() { return liveThread; }
     public ModerationManager moderation() { return moderation; }
     public MultiRedditManager multis() { return multis; }
     public WikiManager wiki() { return wikis; }

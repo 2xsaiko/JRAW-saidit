@@ -1,8 +1,5 @@
 package net.dean.jraw.endpoints;
 
-import com.google.common.base.Joiner;
-import net.dean.jraw.Endpoint;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -10,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.base.Joiner;
+import net.dean.jraw.Endpoint;
 
 /**
  * This class is responsible for the compilation of
@@ -37,7 +37,7 @@ public class MarkdownGenerator extends AbstractEndpointGenerator {
         // Main header
         bw.writeLine("#Endpoints\n");
         bw.writeLine("This file contains a list of all the endpoints (regardless of if they have been implemented) that " +
-                "can be found at the [official reddit API docs](https://www.reddit.com/dev/api/oauth). To update this file, " +
+                "can be found at the [official saidit API docs](https://www.saidit.net/dev/api/oauth). To update this file, " +
                 "run `gradle endpoints:update`.\n");
 
         // Summary
@@ -64,8 +64,8 @@ public class MarkdownGenerator extends AbstractEndpointGenerator {
                             getJavadocUrl(e));
                 }
 
-                // ex: `GET`|[`/api/me.json`](https://www.reddit.com/dev/api#GET_api_me.json)|[`RedditClient.me()`](url and line #)
-                // or: `POST`|[`/api/clear_sessions`](https://www.reddit.com/dev/api#POST_api_clear_sessions)|No
+                // ex: `GET`|[`/api/me.json`](https://www.saidit.net/dev/api#GET_api_me.json)|[`RedditClient.me()`](url and line #)
+                // or: `POST`|[`/api/clear_sessions`](https://www.saidit.net/dev/api#POST_api_clear_sessions)|No
 
                 sb.append('`').append(e.getVerb()).append("`|")
                         .append("[`").append(e.getUri()).append("`](").append(getRedditDocUrl(e)).append(")|")

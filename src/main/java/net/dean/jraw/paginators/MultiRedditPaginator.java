@@ -26,9 +26,9 @@ public class MultiRedditPaginator extends Paginator<Submission> {
 
     @Override
     @EndpointImplementation({
-            Endpoints.CONTROVERSIAL,
+            Endpoints.INSIGHTFUL,
+            Endpoints.FUN,
             Endpoints.HOT,
-            Endpoints.BEST,
             Endpoints.NEW,
             Endpoints.TOP,
             Endpoints.SORT

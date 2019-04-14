@@ -1,14 +1,13 @@
 package net.dean.jraw.models;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import java.text.NumberFormat;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import net.dean.jraw.models.meta.JsonProperty;
 import net.dean.jraw.models.meta.Model;
 import net.dean.jraw.util.Dimension;
 
-import java.text.NumberFormat;
-
-/** This class represents a subreddit, such as /r/pics. */
+/** This class represents a subreddit, such as /s/pics. */
 @Model(kind = Model.Kind.SUBREDDIT)
 public final class Subreddit extends Thing implements Comparable<Subreddit> {
 
@@ -149,7 +148,7 @@ public final class Subreddit extends Thing implements Comparable<Subreddit> {
         return data("title");
     }
 
-    /** Gets the relative URL of the subreddit (ex: "/r/pics") */
+    /** Gets the relative URL of the subreddit (ex: "/s/pics") */
     @JsonProperty
     public String getRelativeLocation() {
         return data("url");

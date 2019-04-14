@@ -1,9 +1,5 @@
 package net.dean.jraw.models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import net.dean.jraw.util.JrawUtils;
-import net.dean.jraw.models.meta.JsonProperty;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URI;
@@ -14,6 +10,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import net.dean.jraw.models.meta.JsonProperty;
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * This class provides an abstract model for retrieving data from a JSON node, although not necessarily relating to the
@@ -118,7 +118,7 @@ public abstract class JsonModel {
 
     /**
      * <p>This method gets the "data" JsonNode. In a traditional API request (let's say to
-     * <a href="http://www.reddit.com/r/pics/about.json">/r/pics/about.json</a>), the Reddit API returns some
+     * <a href="http://www.saidit.net/s/pics/about.json">/s/pics/about.json</a>), the Reddit API returns some
      * JSON data. An example would look like this:
      *
      * <pre>{@code

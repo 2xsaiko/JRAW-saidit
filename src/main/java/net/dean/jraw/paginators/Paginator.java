@@ -1,12 +1,18 @@
 package net.dean.jraw.paginators;
 
-import okhttp3.CacheControl;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import net.dean.jraw.RedditClient;
-import net.dean.jraw.http.*;
+import net.dean.jraw.http.HttpRequest;
+import net.dean.jraw.http.NetworkException;
+import net.dean.jraw.http.RestResponse;
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Thing;
-
-import java.util.*;
+import okhttp3.CacheControl;
 
 /**
  * Provides the ability to iterate through data provided by the Reddit API.
@@ -244,7 +250,7 @@ public abstract class Paginator<T extends Thing> implements RedditIterable<T> {
 
     /**
      * Generates the base URI. Parameters will be stacked after this URI to form a query. For example,
-     * {@link net.dean.jraw.paginators.SubredditPaginator} will return something like "/r/pics/new.json"
+     * {@link net.dean.jraw.paginators.SubredditPaginator} will return something like "/s/pics/new.json"
      *
      * @return The base URI that will be used in queries
      */

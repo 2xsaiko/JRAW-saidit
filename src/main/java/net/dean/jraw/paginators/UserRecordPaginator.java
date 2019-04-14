@@ -42,7 +42,7 @@ public class UserRecordPaginator extends GenericUserRecordPaginator {
 
     @Override
     protected String getUriPrefix() {
-        return "/r/" + subreddit + "/about/";
+        return "/s/" + subreddit + "/about/";
     }
 
     @Override

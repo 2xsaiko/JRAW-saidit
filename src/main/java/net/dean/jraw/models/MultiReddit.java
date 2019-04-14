@@ -1,18 +1,18 @@
 package net.dean.jraw.models;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-import net.dean.jraw.util.NoSuchEnumConstantException;
-import net.dean.jraw.models.attr.Created;
-import net.dean.jraw.models.meta.JsonProperty;
-import net.dean.jraw.models.meta.Model;
-import com.fasterxml.jackson.databind.JsonNode;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.JsonNode;
+import net.dean.jraw.models.attr.Created;
+import net.dean.jraw.models.meta.JsonProperty;
+import net.dean.jraw.models.meta.Model;
+import net.dean.jraw.util.NoSuchEnumConstantException;
+
 /**
- * Represents a collection of subreddits. See <a href="http://www.reddit.com/r/multihub">here</a> for some examples.
+ * Represents a collection of subreddits. See <a href="http://www.saidit.net/s/multihub">here</a> for some examples.
  */
 @Model(kind = Model.Kind.MULTIREDDIT)
 public final class MultiReddit extends Thing implements Created {

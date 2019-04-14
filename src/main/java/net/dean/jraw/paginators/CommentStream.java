@@ -1,8 +1,8 @@
 package net.dean.jraw.paginators;
 
-import net.dean.jraw.util.JrawUtils;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Comment;
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * A Paginator geared towards viewing the comments on a subreddit. See
@@ -33,7 +33,7 @@ public class CommentStream extends Paginator<Comment> {
 
     @Override
     protected String getBaseUri() {
-        // "/r/{subreddit}/comments" or just "/comments"
+        // "/s/{subreddit}/comments" or just "/comments"
         return JrawUtils.getSubredditPath(subreddit, "/comments");
     }
 }

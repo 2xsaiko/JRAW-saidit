@@ -1,10 +1,12 @@
 package net.dean.jraw.managers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import net.dean.jraw.ApiException;
 import net.dean.jraw.EndpointImplementation;
 import net.dean.jraw.Endpoints;
-import net.dean.jraw.util.JrawUtils;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.HttpRequest;
 import net.dean.jraw.http.MultiRedditUpdateRequest;
@@ -12,9 +14,7 @@ import net.dean.jraw.http.NetworkException;
 import net.dean.jraw.http.RestResponse;
 import net.dean.jraw.models.MultiReddit;
 import net.dean.jraw.models.MultiSubreddit;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * This class provides the ability to create, read, update, and delete multireddits.
@@ -83,12 +83,12 @@ public class MultiRedditManager extends AbstractManager {
      * @param subreddit The subreddit to add
      * @throws NetworkException If the request was not successful
      */
-    @EndpointImplementation(Endpoints.MULTI_MULTIPATH_R_SRNAME_PUT)
+    @EndpointImplementation(Endpoints.MULTI_MULTIPATH_S_SRNAME_PUT)
     public void addSubreddit(String multiName, String subreddit) throws NetworkException {
         MultiRedditUpdateRequest.SubredditModel data = new MultiRedditUpdateRequest.SubredditModel(subreddit);
 
         HttpRequest request = reddit.request()
-                .endpoint(Endpoints.MULTI_MULTIPATH_R_SRNAME_PUT, multiName, subreddit)
+                .endpoint(Endpoints.MULTI_MULTIPATH_S_SRNAME_PUT, multiName, subreddit)
                 .put(JrawUtils.mapOf(
                         "model", JrawUtils.toJson(data),
                         "multipath", getMultiPath(multiName),
@@ -105,10 +105,10 @@ public class MultiRedditManager extends AbstractManager {
      * @param subreddit The subreddit to remove
      * @throws NetworkException If the request was not successful
      */
-    @EndpointImplementation(Endpoints.MULTI_MULTIPATH_R_SRNAME_DELETE)
+    @EndpointImplementation(Endpoints.MULTI_MULTIPATH_S_SRNAME_DELETE)
     public void removeSubreddit(String multiName, String subreddit) throws NetworkException {
         HttpRequest request = reddit.request()
-                .endpoint(Endpoints.MULTI_MULTIPATH_R_SRNAME_DELETE, getMultiPath(multiName).substring(1), subreddit)
+                .endpoint(Endpoints.MULTI_MULTIPATH_S_SRNAME_DELETE, getMultiPath(multiName).substring(1), subreddit)
                 .query(
                         "multipath", getMultiPath(multiName),
                         "srname", subreddit
@@ -262,7 +262,7 @@ public class MultiRedditManager extends AbstractManager {
      */
     @EndpointImplementation({
             Endpoints.MULTI_MULTIPATH_GET,
-            Endpoints.MULTI_MULTIPATH_R_SRNAME_GET,
+            Endpoints.MULTI_MULTIPATH_S_SRNAME_GET,
             Endpoints.MULTI_MULTIPATH_DESCRIPTION_GET
     })
     public MultiReddit get(String owner, String multiName) throws NetworkException, ApiException {
@@ -296,7 +296,7 @@ public class MultiRedditManager extends AbstractManager {
      * currently logged in user. If this method is being used in conjunction with
      * {@link HttpRequest.Builder#endpoint(Endpoints, String...)}, then it is recommended to call
      * {@code .substring(1)} on the return value because without it, the resulting URL would have double forward slashes.
-     * For example: {@code http://www.reddit.com/api/multi//user/USERNAME/m/MULTI_NAME}
+     * For example: {@code http://www.saidit.net/api/multi//user/USERNAME/m/MULTI_NAME}
      *
      * @param multiName The name of the multireddit
      * @return The multireddit's path

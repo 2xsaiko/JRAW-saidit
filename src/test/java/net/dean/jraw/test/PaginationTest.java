@@ -1,23 +1,43 @@
 package net.dean.jraw.test;
 
-import com.google.common.collect.Ordering;
-import net.dean.jraw.ApiException;
-import net.dean.jraw.util.JrawUtils;
-import net.dean.jraw.RedditClient;
-import net.dean.jraw.http.NetworkException;
-import net.dean.jraw.managers.MultiRedditManager;
-import net.dean.jraw.models.*;
-import net.dean.jraw.paginators.*;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import com.google.common.collect.Ordering;
+import net.dean.jraw.ApiException;
+import net.dean.jraw.RedditClient;
+import net.dean.jraw.http.NetworkException;
+import net.dean.jraw.managers.MultiRedditManager;
+import net.dean.jraw.models.Listing;
+import net.dean.jraw.models.MultiReddit;
+import net.dean.jraw.models.Submission;
+import net.dean.jraw.models.Subreddit;
+import net.dean.jraw.models.Thing;
+import net.dean.jraw.paginators.CommentStream;
+import net.dean.jraw.paginators.DuplicatesPaginator;
+import net.dean.jraw.paginators.ImportantUserPaginator;
+import net.dean.jraw.paginators.InboxPaginator;
+import net.dean.jraw.paginators.ModLogPaginator;
+import net.dean.jraw.paginators.ModeratorPaginator;
+import net.dean.jraw.paginators.MultiRedditPaginator;
+import net.dean.jraw.paginators.Paginator;
+import net.dean.jraw.paginators.Sorting;
+import net.dean.jraw.paginators.SpecificPaginator;
+import net.dean.jraw.paginators.SubmissionSearchPaginator;
+import net.dean.jraw.paginators.SubredditPaginator;
+import net.dean.jraw.paginators.SubredditSearchPaginator;
+import net.dean.jraw.paginators.SubredditStream;
+import net.dean.jraw.paginators.TimePeriod;
+import net.dean.jraw.paginators.UserContributionPaginator;
+import net.dean.jraw.paginators.UserRecordPaginator;
+import net.dean.jraw.paginators.UserSubredditsPaginator;
+import net.dean.jraw.util.JrawUtils;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
 
 /**
  * This class tests all concrete subclasses of {@link net.dean.jraw.paginators.Paginator}
@@ -149,44 +169,39 @@ public class PaginationTest extends RedditTest {
         commonTest(paginator);
     }
 
-    @Test
-    public void testMultiHubPaginator() {
-        try {
-            MultiHubPaginator paginator = new MultiHubPaginator(reddit);
-
-            final int threshold = 3;
-            int valid = 0;
-            int invalid = 0;
-
-            Listing<MultiHubPaginator.MultiRedditId> ids = paginator.next();
-
-            for (MultiHubPaginator.MultiRedditId id : ids) {
-                try {
-                    MultiReddit multi = manager.get(id.getOwner(), id.getName());
-                    validateModel(multi);
-                    valid++;
-                } catch (NetworkException | ApiException e) {
-                    invalid++;
-                }
-
-                if (valid >= threshold) {
-                    // Test passed
-                    break;
-                }
-                if (invalid >= threshold) {
-                    // More than the acceptable amount failed, something is probably broken
-                    fail("Failed to get " + threshold + " separate multireddits");
-                }
-            }
-        } catch (NetworkException e) {
-            handle(e);
-        }
-    }
-
-    @Test
-    public void testLiveThreadPaginator() {
-        commonTest(new LiveThreadPaginator(reddit, "ts4r8m1g99ys"));
-    }
+//    @Test
+//    public void testMultiHubPaginator() {
+//        try {
+//            MultiHubPaginator paginator = new MultiHubPaginator(reddit);
+//
+//            final int threshold = 3;
+//            int valid = 0;
+//            int invalid = 0;
+//
+//            Listing<MultiHubPaginator.MultiRedditId> ids = paginator.next();
+//
+//            for (MultiHubPaginator.MultiRedditId id : ids) {
+//                try {
+//                    MultiReddit multi = manager.get(id.getOwner(), id.getName());
+//                    validateModel(multi);
+//                    valid++;
+//                } catch (NetworkException | ApiException e) {
+//                    invalid++;
+//                }
+//
+//                if (valid >= threshold) {
+//                    // Test passed
+//                    break;
+//                }
+//                if (invalid >= threshold) {
+//                    // More than the acceptable amount failed, something is probably broken
+//                    fail("Failed to get " + threshold + " separate multireddits");
+//                }
+//            }
+//        } catch (NetworkException e) {
+//            handle(e);
+//        }
+//    }
 
     @Test
     public void testInboxPaginator() {

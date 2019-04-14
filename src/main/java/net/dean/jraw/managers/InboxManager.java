@@ -1,14 +1,17 @@
 package net.dean.jraw.managers;
 
-import net.dean.jraw.*;
+import java.util.Map;
+
+import net.dean.jraw.ApiException;
+import net.dean.jraw.EndpointImplementation;
+import net.dean.jraw.Endpoints;
+import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.MediaTypes;
 import net.dean.jraw.http.NetworkException;
 import net.dean.jraw.http.RestResponse;
 import net.dean.jraw.models.Captcha;
 import net.dean.jraw.models.Message;
 import net.dean.jraw.util.JrawUtils;
-
-import java.util.Map;
 
 /**
  * This class is responsible for managing a user's inbox
@@ -76,7 +79,7 @@ public class InboxManager extends AbstractManager {
                 .build());
         if (response.getStatusCode() != 202) {
             // Returns 202 if the request was acknowledged
-            // See https://www.reddit.com/dev/api/oauth#POST_api_read_all_messages
+            // See https://www.saidit.net/dev/api/oauth#POST_api_read_all_messages
             throw new IllegalStateException("Expected to return 202 Accepted, got "
                     + response.getStatusCode() + " " + response.getStatusMessage());
         }
@@ -99,7 +102,7 @@ public class InboxManager extends AbstractManager {
      * Sends a private message.
      *
      * @param from Who to send this message as. If sending as the currently authenticated user, leave this empty. If
-     *             sending as a subreddit you moderate, use the name of the subreddit without "/r/" (for example: "pics")
+     *             sending as a subreddit you moderate, use the name of the subreddit without "/s/" (for example: "pics")
      * @param to Who to send this message to
      * @param subject The message's subject
      * @param body The message's body
@@ -130,7 +133,7 @@ public class InboxManager extends AbstractManager {
      * Sends a private message.
      *
      * @param from Who to send this message as. If sending as the currently authenticated user, leave this empty. If
-     *             sending as a subreddit you moderate, use the name of the subreddit without "/r/" (for example: "pics")
+     *             sending as a subreddit you moderate, use the name of the subreddit without "/s/" (for example: "pics")
      * @param to Who to send this message to
      * @param subject The message's subject
      * @param body The message's body

@@ -6,7 +6,7 @@ import requests
 import json
 
 class EndpointIdentifier:
-    _page = 'https://www.reddit.com/dev/api/oauth'
+    _page = 'https://www.saidit.net/dev/api/oauth'
     _no_scope = '(any scope)'
     _headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'

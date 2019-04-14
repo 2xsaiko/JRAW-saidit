@@ -1,12 +1,12 @@
 package net.dean.jraw.test;
 
 import net.dean.jraw.ApiException;
-import net.dean.jraw.util.Version;
 import net.dean.jraw.http.NetworkException;
 import net.dean.jraw.managers.InboxManager;
 import net.dean.jraw.models.Contribution;
 import net.dean.jraw.models.PrivateMessage;
 import net.dean.jraw.paginators.InboxPaginator;
+import net.dean.jraw.util.Version;
 import org.testng.annotations.Test;
 
 public class InboxManagerTest extends RedditTest {
@@ -50,7 +50,7 @@ public class InboxManagerTest extends RedditTest {
         try {
             String subject = "InboxManagerTest for JRAW v" + Version.get().formatted();
             String body = "epoch=" + epochMillis();
-            inbox.compose("/r/jraw_testing2", subject, body);
+            inbox.compose("/s/jraw_testing2", subject, body);
         } catch (NetworkException | ApiException e) {
             handle(e);
         }

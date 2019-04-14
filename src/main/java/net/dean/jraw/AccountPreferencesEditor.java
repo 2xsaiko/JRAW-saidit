@@ -1,11 +1,11 @@
 package net.dean.jraw;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import net.dean.jraw.models.AccountPreferences;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import net.dean.jraw.models.AccountPreferences;
 
 public class AccountPreferencesEditor {
     private final Map<String, String> args;
@@ -34,7 +34,7 @@ public class AccountPreferencesEditor {
      * @param value the value for the setting
      *
      * The setting string and value string must be valid!
-     * A list of valid settings and values can be found here https://www.reddit.com/dev/api#PATCH_api_v1_me_prefs*/
+     * A list of valid settings and values can be found here https://www.saidit.net/dev/api#PATCH_api_v1_me_prefs*/
     public void setArgs(String setting, String value){
         args.put(setting, value);
     }

@@ -1,13 +1,13 @@
 package net.dean.jraw.paginators;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.dean.jraw.EndpointImplementation;
 import net.dean.jraw.Endpoints;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.PublicContribution;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class provides a way to iterate over submissions and comments relevant to moderators, such as those reported
@@ -77,7 +77,7 @@ public class ModeratorPaginator extends GenericPaginator<PublicContribution> {
 
     @Override
     protected String getUriPrefix() {
-        return String.format("/r/%s/about/", subreddit);
+        return String.format("/s/%s/about/", subreddit);
     }
 
     @Override

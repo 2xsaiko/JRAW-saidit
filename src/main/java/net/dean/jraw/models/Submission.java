@@ -1,14 +1,14 @@
 package net.dean.jraw.models;
 
+import java.text.NumberFormat;
+import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import net.dean.jraw.models.meta.JsonProperty;
 import net.dean.jraw.models.meta.Model;
 import net.dean.jraw.models.meta.SubmissionSerializer;
 import net.dean.jraw.util.JrawUtils;
-
-import java.text.NumberFormat;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Represents content that the user has submitted, whether that be a self post or a link. More information can be found
@@ -159,7 +159,7 @@ public final class Submission extends PublicContribution {
     }
 
     /**
-     * Relative URL (of reddit.com) of the permanent URL for this Submission
+     * Relative URL (of saidit.net) of the permanent URL for this Submission
      * @return Gets the permalink of this submission
      */
     @JsonProperty

@@ -1,16 +1,16 @@
 package net.dean.jraw.paginators;
 
+import java.util.Map;
+
 import net.dean.jraw.EndpointImplementation;
 import net.dean.jraw.Endpoints;
-import net.dean.jraw.util.JrawUtils;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Submission;
-
-import java.util.Map;
+import net.dean.jraw.util.JrawUtils;
 
 /**
- * This class allows access to <a href="https://www.reddit.com/search">Reddit's search functionality</a>. This class
+ * This class allows access to <a href="https://www.saidit.net/search">Reddit's search functionality</a>. This class
  * uses a special enum for sorting the values retrieved called {@link SearchSort}. To set this new sorting, use
  * {@link #setSearchSorting(SearchSort)}.
  */
@@ -48,7 +48,7 @@ public class SubmissionSearchPaginator extends Paginator<Submission> {
     protected String getBaseUri() {
         String base = "/search";
         if (subreddit != null) {
-            base = "/r/" + subreddit + base;
+            base = "/s/" + subreddit + base;
         }
         return base;
     }

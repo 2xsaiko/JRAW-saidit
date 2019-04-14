@@ -1,10 +1,10 @@
 package net.dean.jraw.fluent;
 
+import java.util.List;
+
 import net.dean.jraw.managers.WikiManager;
 import net.dean.jraw.models.WikiPage;
 import net.dean.jraw.models.WikiPageSettings;
-
-import java.util.List;
 
 /**
  * Provides a reference to either reddit's main wiki or a specific subreddit's wiki.
@@ -36,7 +36,7 @@ public final class WikiReference extends AbstractReference {
 
     /**
      * Gets a list of pages in this wiki. The contents of the list will in format such that the page can be accessed at
-     * {@code https://www.reddit.com/r/$subreddit/wiki/$name}.
+     * {@code https://www.saidit.net/s/$subreddit/wiki/$name}.
      */
     @NetworkingCall
     public List<String> pages() {

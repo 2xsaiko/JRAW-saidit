@@ -1,23 +1,21 @@
 package net.dean.jraw.managers;
 
+import java.util.Map;
+
 import net.dean.jraw.ApiException;
-import net.dean.jraw.*;
+import net.dean.jraw.EndpointImplementation;
+import net.dean.jraw.Endpoints;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.AuthenticationMethod;
-import net.dean.jraw.http.MediaTypes;
 import net.dean.jraw.http.NetworkException;
-import net.dean.jraw.http.RequestBody;
 import net.dean.jraw.http.RestResponse;
 import net.dean.jraw.models.Comment;
 import net.dean.jraw.models.DistinguishedStatus;
 import net.dean.jraw.models.FlairTemplate;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.models.Thing;
-import net.dean.jraw.models.UserRecord;
 import net.dean.jraw.models.attr.Votable;
 import net.dean.jraw.util.JrawUtils;
-
-import java.util.Map;
 
 /**
  * This class manages actions most commonly reserved for moderators (although some of them can be used on yourself
@@ -52,23 +50,23 @@ public class ModerationManager extends AbstractManager {
                 )).build());
     }
 
-    /**
-     * Sets whether or not this submission should be marked as a spoiler
-     *
-     * @param s    The submission to modify
-     * @param nsfw Whether or not this submission is a spoiler
-     * @throws net.dean.jraw.http.NetworkException If the request was not successful
-     * @throws net.dean.jraw.ApiException          If the API returned an error
-     */
-    @EndpointImplementation({Endpoints.SPOILER, Endpoints.UNSPOILER})
-    public void setSpoiler(Submission s, boolean nsfw) throws NetworkException,
-            ApiException {
-        genericPost(reddit.request()
-                .endpoint(nsfw ? Endpoints.SPOILER : Endpoints.UNSPOILER)
-                .post(JrawUtils.mapOf(
-                        "id", s.getFullName()
-                )).build());
-    }
+    // /**
+    //  * Sets whether or not this submission should be marked as a spoiler
+    //  *
+    //  * @param s    The submission to modify
+    //  * @param nsfw Whether or not this submission is a spoiler
+    //  * @throws net.dean.jraw.http.NetworkException If the request was not successful
+    //  * @throws net.dean.jraw.ApiException          If the API returned an error
+    //  */
+    // @EndpointImplementation({Endpoints.SPOILER, Endpoints.UNSPOILER})
+    // public void setSpoiler(Submission s, boolean nsfw) throws NetworkException,
+    //         ApiException {
+    //     genericPost(reddit.request()
+    //             .endpoint(nsfw ? Endpoints.SPOILER : Endpoints.UNSPOILER)
+    //             .post(JrawUtils.mapOf(
+    //                     "id", s.getFullName()
+    //             )).build());
+    // }
 
     /**
      * Deletes a submission that you posted
@@ -110,7 +108,7 @@ public class ModerationManager extends AbstractManager {
             args.put("note", note);
 
         genericPost(reddit.request()
-                .path("/r/" + subreddit + "/api/friend")
+                .path("/s/" + subreddit + "/api/friend")
                 .post(args)
                 .build());
     }
@@ -140,7 +138,7 @@ public class ModerationManager extends AbstractManager {
             args.put("note", note);
 
         genericPost(reddit.request()
-                .path("/r/" + subreddit + "/api/friend")
+                .path("/s/" + subreddit + "/api/friend")
                 .post(args)
                 .build());
     }
@@ -400,7 +398,7 @@ public class ModerationManager extends AbstractManager {
 
         RestResponse response = reddit.execute(reddit.request()
                 .post(args)
-                .path("/r/" + subreddit + Endpoints.SELECTFLAIR.getEndpoint().getUri())
+                .path("/s/" + subreddit + Endpoints.SELECTFLAIR.getEndpoint().getUri())
                 .build());
         if (response.hasErrors()) {
             throw response.getError();
@@ -464,7 +462,7 @@ public class ModerationManager extends AbstractManager {
 
         RestResponse response = reddit.execute(reddit.request()
                 .post(args)
-                .path("/r/" + subreddit + Endpoints.FLAIR.getEndpoint().getUri())
+                .path("/s/" + subreddit + Endpoints.FLAIR.getEndpoint().getUri())
                 .build());
         if (response.hasErrors()) {
             throw response.getError();

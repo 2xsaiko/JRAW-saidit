@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    id 'maven'
-    id 'maven-publish'
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.4.0x'
 }
@@ -95,22 +93,11 @@ jacocoTestReport {
     }
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
-}
-
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-}
-
 defaultTasks "test"
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.13'
     distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
+
+apply from: 'https://raw.githubusercontent.com/therealfarfetchd/gradle-tools/master/publish/publish-gen1.gradle'

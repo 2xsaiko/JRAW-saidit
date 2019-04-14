@@ -1,12 +1,11 @@
 package net.dean.jraw.models;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
-import net.dean.jraw.models.meta.JsonProperty;
-import net.dean.jraw.models.meta.Model;
-
 import java.text.NumberFormat;
 import java.util.Date;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import net.dean.jraw.models.meta.JsonProperty;
+import net.dean.jraw.models.meta.Model;
 
 /** Represents a comment on a Submission */
 @Model(kind = Model.Kind.COMMENT)
@@ -165,7 +164,7 @@ public class Comment extends PublicContribution {
         return data("score_hidden", Boolean.class);
     }
 
-    /** The subreddit the comment was posted in, excluding the "/r/" prefix (ex: "pics") */
+    /** The subreddit the comment was posted in, excluding the "/s/" prefix (ex: "pics") */
     @JsonProperty
     public String getSubredditName() {
         return data("subreddit");

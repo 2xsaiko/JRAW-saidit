@@ -1,14 +1,14 @@
 package net.dean.jraw.paginators;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.dean.jraw.EndpointImplementation;
 import net.dean.jraw.Endpoints;
-import net.dean.jraw.util.JrawUtils;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Submission;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * This class is used to paginate through the front page or a subreddit with different time periods or sortings.
@@ -63,9 +63,9 @@ public class SubredditPaginator extends Paginator<Submission> {
     }
     @Override
     @EndpointImplementation({
-            Endpoints.CONTROVERSIAL,
+            Endpoints.INSIGHTFUL,
+            Endpoints.FUN,
             Endpoints.HOT,
-            Endpoints.BEST,
             Endpoints.NEW,
             Endpoints.TOP,
             Endpoints.SORT

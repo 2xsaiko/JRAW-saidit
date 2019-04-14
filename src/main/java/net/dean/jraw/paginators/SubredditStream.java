@@ -23,11 +23,11 @@ public class SubredditStream extends GenericPaginator<Subreddit> {
 
     @Override
     @EndpointImplementation({
-            Endpoints.SUBREDDITS_POPULAR,
-            Endpoints.SUBREDDITS_NEW,
-            Endpoints.SUBREDDITS_GOLD,
-            Endpoints.SUBREDDITS_DEFAULT,
-            Endpoints.SUBREDDITS_WHERE
+            Endpoints.SUBS_POPULAR,
+            Endpoints.SUBS_NEW,
+            Endpoints.SUBS_GOLD,
+            Endpoints.SUBS_DEFAULT,
+            Endpoints.SUBS_WHERE
     })
     public Listing<Subreddit> next() {
         // Just call super so that we can add the @EndpointImplementation annotation
@@ -36,7 +36,7 @@ public class SubredditStream extends GenericPaginator<Subreddit> {
 
     @Override
     public String getUriPrefix() {
-        return "/subreddits/";
+        return "/subs/";
     }
 
     @Override

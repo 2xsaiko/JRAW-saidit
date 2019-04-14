@@ -1,33 +1,49 @@
 package net.dean.jraw;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import net.dean.jraw.auth.AuthenticationListener;
-import net.dean.jraw.http.*;
-import net.dean.jraw.http.oauth.Credentials;
-import net.dean.jraw.http.oauth.InvalidScopeException;
-import net.dean.jraw.http.oauth.OAuthData;
-import net.dean.jraw.http.oauth.OAuthHelper;
-import net.dean.jraw.models.*;
-import net.dean.jraw.models.meta.Model;
-import net.dean.jraw.models.meta.SubmissionSerializer;
-import net.dean.jraw.paginators.Sorting;
-import net.dean.jraw.paginators.SubredditPaginator;
-import net.dean.jraw.util.JrawUtils;
-
-import java.lang.System;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import net.dean.jraw.auth.AuthenticationListener;
+import net.dean.jraw.http.AuthenticationMethod;
+import net.dean.jraw.http.HttpAdapter;
+import net.dean.jraw.http.HttpRequest;
+import net.dean.jraw.http.MediaTypes;
+import net.dean.jraw.http.NetworkException;
+import net.dean.jraw.http.OkHttpAdapter;
+import net.dean.jraw.http.RestClient;
+import net.dean.jraw.http.RestResponse;
+import net.dean.jraw.http.SubmissionRequest;
+import net.dean.jraw.http.UserAgent;
+import net.dean.jraw.http.oauth.Credentials;
+import net.dean.jraw.http.oauth.InvalidScopeException;
+import net.dean.jraw.http.oauth.OAuthData;
+import net.dean.jraw.http.oauth.OAuthHelper;
+import net.dean.jraw.models.Account;
+import net.dean.jraw.models.CommentSort;
+import net.dean.jraw.models.Listing;
+import net.dean.jraw.models.LoggedInAccount;
+import net.dean.jraw.models.OAuthScope;
+import net.dean.jraw.models.Ruleset;
+import net.dean.jraw.models.Submission;
+import net.dean.jraw.models.Subreddit;
+import net.dean.jraw.models.SubredditRule;
+import net.dean.jraw.models.Thing;
+import net.dean.jraw.models.Trophy;
+import net.dean.jraw.models.meta.Model;
+import net.dean.jraw.models.meta.SubmissionSerializer;
+import net.dean.jraw.util.JrawUtils;
 
 /**
  * This class provides a gateway to the services this library provides
  */
 public class RedditClient extends RestClient {
     /** The host that will be used to execute OAuth requests */
-    public static final String HOST = "oauth.reddit.com";
+    public static final String HOST = "oauth.saidit.net";
     /** Used under special circumstances, such as OAuth authentications */
-    public static final String HOST_SPECIAL = "www.reddit.com";
+    public static final String HOST_SPECIAL = "www.saidit.net";
     /** The amount of requests allowed per minute when using OAuth2 */
     public static final int REQUESTS_PER_MINUTE = 60;
 
@@ -437,7 +453,7 @@ public class RedditClient extends RestClient {
     @EndpointImplementation(Endpoints.STYLESHEET)
     public String getStylesheet(String subreddit) throws NetworkException {
         if (subreddit == null) throw new NullPointerException("subreddit cannot be null");
-        String path = "/r/" + subreddit + "/stylesheet";
+        String path = "/s/" + subreddit + "/stylesheet";
 
         HttpRequest r = request()
                 .path(path)
@@ -475,30 +491,30 @@ public class RedditClient extends RestClient {
         return new Ruleset(subRules, siteRules);
     }
 
-    /**
-     * Gets a list of trending subreddits' names. See <a href="http://www.reddit.com/r/trendingsubreddits/">here</a> for more.
-     * @return A list of trending subreddits' names
-     */
-    public List<String> getTrendingSubreddits() {
-        SubredditPaginator paginator = new SubredditPaginator(this, "trendingsubreddits");
-        paginator.setSorting(Sorting.NEW);
-
-        Submission latest = paginator.next().get(0);
-        String title = latest.getTitle();
-        String[] parts = title.split(" ");
-        List<String> subreddits = new ArrayList<>(NUM_TRENDING_SUBREDDITS);
-
-        for (String part : parts) {
-            if (part.startsWith("/r/")) {
-                String sub = part.substring("/r/".length());
-                // All but the last part will be formatted like "/r/{name},", so remove the commas
-                sub = sub.replace(",", "");
-                subreddits.add(sub);
-            }
-        }
-
-        return subreddits;
-    }
+//    /**
+//     * Gets a list of trending subreddits' names. See <a href="http://www.saidit.net/s/trendingsubreddits/">here</a> for more.
+//     * @return A list of trending subreddits' names
+//     */
+//    public List<String> getTrendingSubreddits() {
+//        SubredditPaginator paginator = new SubredditPaginator(this, "trendingsubreddits");
+//        paginator.setSorting(Sorting.NEW);
+//
+//        Submission latest = paginator.next().get(0);
+//        String title = latest.getTitle();
+//        String[] parts = title.split(" ");
+//        List<String> subreddits = new ArrayList<>(NUM_TRENDING_SUBREDDITS);
+//
+//        for (String part : parts) {
+//            if (part.startsWith("/s/")) {
+//                String sub = part.substring("/s/".length());
+//                // All but the last part will be formatted like "/s/{name},", so remove the commas
+//                sub = sub.replace(",", "");
+//                subreddits.add(sub);
+//            }
+//        }
+//
+//        return subreddits;
+//    }
 
     /**
      * Gets a list of similar subreddits based on the given ones.

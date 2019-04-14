@@ -1,15 +1,15 @@
 package net.dean.jraw.paginators;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import net.dean.jraw.EndpointImplementation;
 import net.dean.jraw.Endpoints;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.http.NetworkException;
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Subreddit;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * This Paginator provides a way to iterate through the logged-in user's subreddits they interact with, whether that be
@@ -29,7 +29,7 @@ public class UserSubredditsPaginator extends GenericPaginator<Subreddit> {
 
     @Override
     public String getUriPrefix() {
-        return "/subreddits/mine/";
+        return "/subs/mine/";
     }
 
     @Override
@@ -39,10 +39,10 @@ public class UserSubredditsPaginator extends GenericPaginator<Subreddit> {
 
     @Override
     @EndpointImplementation({
-            Endpoints.SUBREDDITS_MINE_CONTRIBUTOR,
-            Endpoints.SUBREDDITS_MINE_MODERATOR,
-            Endpoints.SUBREDDITS_MINE_SUBSCRIBER,
-            Endpoints.SUBREDDITS_MINE_WHERE
+            Endpoints.SUBS_MINE_CONTRIBUTOR,
+            Endpoints.SUBS_MINE_MODERATOR,
+            Endpoints.SUBS_MINE_SUBSCRIBER,
+            Endpoints.SUBS_MINE_WHERE
     })
     public Listing<Subreddit> next(boolean forceNetwork) {
         // Just call super so that we can add the @EndpointImplementation annotation

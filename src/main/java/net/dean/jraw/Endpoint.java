@@ -31,7 +31,7 @@ public class Endpoint implements Comparable<Endpoint> {
      * @param requestDescriptor A string consisting of two parts: the HTTP verb, and the URI. For example:
      *                          "POST /api/login"
      * @param scope This endpoint's scope, such as "accounts". Can be found
-     *                 <a href="http://www.reddit.com/dev/api">here</a>
+     *                 <a href="http://www.saidit.net/dev/api">here</a>
      */
     public Endpoint(String requestDescriptor, String scope) {
         this.requestDescriptor = requestDescriptor;
@@ -48,7 +48,7 @@ public class Endpoint implements Comparable<Endpoint> {
 
     /**
      * Gets this endpoint's OAuth2 scope. Always null for normal library use. See
-     * <a href="http://www.reddit.com/dev/api">here</a>
+     * <a href="http://www.saidit.net/dev/api">here</a>
      * for examples.
      *
      * @return This endpoint's scope

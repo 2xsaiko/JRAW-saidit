@@ -1,8 +1,13 @@
 package net.dean.jraw.managers;
 
+import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.ImmutableList;
-
 import net.dean.jraw.AccountPreferencesEditor;
 import net.dean.jraw.ApiException;
 import net.dean.jraw.EndpointImplementation;
@@ -14,24 +19,18 @@ import net.dean.jraw.http.RequestBody;
 import net.dean.jraw.http.RestResponse;
 import net.dean.jraw.models.AccountPreferences;
 import net.dean.jraw.models.Captcha;
+import net.dean.jraw.models.Comment;
 import net.dean.jraw.models.Contribution;
 import net.dean.jraw.models.FlairTemplate;
 import net.dean.jraw.models.KarmaBreakdown;
 import net.dean.jraw.models.PublicContribution;
 import net.dean.jraw.models.Submission;
-import net.dean.jraw.models.Comment;
 import net.dean.jraw.models.Subreddit;
 import net.dean.jraw.models.Thing;
 import net.dean.jraw.models.UserRecord;
 import net.dean.jraw.models.VoteDirection;
 import net.dean.jraw.models.attr.Votable;
 import net.dean.jraw.util.JrawUtils;
-
-import java.net.URL;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This class manages common user actions, such as voting, commenting, saving, etc.
@@ -527,7 +526,7 @@ public class AccountManager extends AbstractManager {
     @EndpointImplementation(Endpoints.SETFLAIRENABLED)
     public void setFlairEnabled(String subreddit, boolean enabled) throws NetworkException, ApiException {
         RestResponse response = reddit.execute(reddit.request()
-                .path("/r/" + subreddit + Endpoints.SETFLAIRENABLED.getEndpoint().getUri())
+                .path("/s/" + subreddit + Endpoints.SETFLAIRENABLED.getEndpoint().getUri())
                 .post(JrawUtils.mapOf(
                         "api_type", "json",
                         "enabled", enabled
@@ -564,7 +563,7 @@ public class AccountManager extends AbstractManager {
      * Gets the preferences for this account
      *
      * @param prefs The specifics name of the desired preferences. These can be found
-     *              <a href="https://www.reddit.com/dev/api#GET_api_v1_me_prefs">here</a>. Leave empty to fetch all.
+     *              <a href="https://www.saidit.net/dev/api#GET_api_v1_me_prefs">here</a>. Leave empty to fetch all.
      * @return An AccountPreferences that represent this account's preferences
      * @throws NetworkException If the request was not successful
      */
@@ -576,7 +575,7 @@ public class AccountManager extends AbstractManager {
      * Gets the preferences for this account
      *
      * @param prefs The specific names of the desired preferences. These can be found
-     *              <a href="https://www.reddit.com/dev/api#GET_api_v1_me_prefs">here</a>.
+     *              <a href="https://www.saidit.net/dev/api#GET_api_v1_me_prefs">here</a>.
      * @return An AccountPreferences that represent this account's preferences
      * @throws NetworkException If the request was not successful
      */
@@ -684,7 +683,7 @@ public class AccountManager extends AbstractManager {
         }
 
         RestResponse response = genericPost(reddit.request()
-                .path("/r/" + subreddit + Endpoints.FLAIRSELECTOR.getEndpoint().getUri())
+                .path("/s/" + subreddit + Endpoints.FLAIRSELECTOR.getEndpoint().getUri())
                 .post(formArgs.isEmpty() ? null : formArgs)
                 .build());
         return response.getJson();

@@ -1,18 +1,28 @@
 package net.dean.jraw.test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import com.google.common.base.Optional;
 import net.dean.jraw.http.NetworkException;
-import net.dean.jraw.models.*;
+import net.dean.jraw.models.CommentNode;
+import net.dean.jraw.models.Listing;
+import net.dean.jraw.models.OAuthScope;
+import net.dean.jraw.models.Submission;
+import net.dean.jraw.models.Subreddit;
+import net.dean.jraw.models.Thing;
+import net.dean.jraw.models.Thumbnails;
 import net.dean.jraw.paginators.SubredditPaginator;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 /**
  * This class tests data that is accessible to everyone, such as submissions and basic user information.
@@ -79,7 +89,7 @@ public class ReadOnlyDataTest extends RedditTest {
             Submission s = reddit.getRandomSubmission();
             validateModel(s);
 
-            // From /r/pics
+            // From /s/pics
             s = reddit.getRandomSubmission("pics");
             validateModel(s);
         } catch (NetworkException e) {
@@ -161,18 +171,18 @@ public class ReadOnlyDataTest extends RedditTest {
         }
     }
 
-    @Test
-    public void testTrendingSubs() {
-        List<String> trending = reddit.getTrendingSubreddits();
-
-        try {
-            for (String sub : trending) {
-                validateModel(reddit.getSubreddit(sub));
-            }
-        } catch (NetworkException e) {
-            handle(e);
-        }
-    }
+//    @Test
+//    public void testTrendingSubs() {
+//        List<String> trending = reddit.getTrendingSubreddits();
+//
+//        try {
+//            for (String sub : trending) {
+//                validateModel(reddit.getSubreddit(sub));
+//            }
+//        } catch (NetworkException e) {
+//            handle(e);
+//        }
+//    }
 
     @Test
     public void testGet() {

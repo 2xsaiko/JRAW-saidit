@@ -1,5 +1,17 @@
 package net.dean.jraw.util;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Joiner;
@@ -7,13 +19,6 @@ import com.google.common.net.MediaType;
 import net.dean.jraw.models.Thing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A collection of utility methods
@@ -113,7 +118,7 @@ public final class JrawUtils {
     /**
      * Tests if the given string could possibly be the fullname of an Thing. In order to pass, the first character must
      * be "t", the second character must be a digit in the range of 1-6 or 8, the third character must be an underscore,
-     * and the rest of the letters must be alphanumeric. See <a href="http://www.reddit.com/dev/api#fullnames">here</a>
+     * and the rest of the letters must be alphanumeric. See <a href="http://www.saidit.net/dev/api#fullnames">here</a>
      * for more information.
      *
      * @param name The String to test
@@ -143,14 +148,14 @@ public final class JrawUtils {
     }
 
     /**
-     * Prepends "/r/{subreddit}" to {@code path} if {@code subreddit} is not null
+     * Prepends "/s/{subreddit}" to {@code path} if {@code subreddit} is not null
      * @param subreddit The subreddit to use
      * @param path The path to use
-     * @return "/r/{subreddit}/{path}" if {@code subreddit} is not null, otherwise "{path}"
+     * @return "/s/{subreddit}/{path}" if {@code subreddit} is not null, otherwise "{path}"
      */
     public static String getSubredditPath(String subreddit, String path) {
         if (subreddit != null) {
-            path = "/r/" + subreddit + path;
+            path = "/s/" + subreddit + path;
         }
 
         return path;

@@ -1,11 +1,11 @@
 package net.dean.jraw.models;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import net.dean.jraw.models.attr.Created;
 import net.dean.jraw.models.meta.JsonProperty;
 import net.dean.jraw.models.meta.Model;
-import com.fasterxml.jackson.databind.JsonNode;
-
-import java.util.Date;
 
 /**
  * Represents an administrative action from a moderator of a subreddit
@@ -49,7 +49,7 @@ public final class ModAction extends Thing implements Created {
 
     /**
      * The permalink to the post in question. For example:
-     * "/r/jraw_testing2/comments/2m2gnc/self_post_test_epoch1415796343364/"
+     * "/s/jraw_testing2/comments/2m2gnc/self_post_test_epoch1415796343364/"
      */
     @JsonProperty
     public String getTargetPermalink() {

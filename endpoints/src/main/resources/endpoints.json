@@ -18,8 +18,6 @@
     "edit": [
         "POST /api/del",
         "POST /api/editusertext",
-        "POST /api/live/{thread}/delete_update",
-        "POST /api/live/{thread}/strike_update",
         "POST /api/sendreplies"
     ],
     "flair": [
@@ -43,16 +41,6 @@
         "GET /api/v1/me/prefs",
         "GET /api/v1/me/trophies"
     ],
-    "livemanage": [
-        "POST /api/live/{thread}/accept_contributor_invite",
-        "POST /api/live/{thread}/close_thread",
-        "POST /api/live/{thread}/edit",
-        "POST /api/live/{thread}/invite_contributor",
-        "POST /api/live/{thread}/leave_contributor",
-        "POST /api/live/{thread}/rm_contributor",
-        "POST /api/live/{thread}/rm_contributor_invite",
-        "POST /api/live/{thread}/set_contributor_permissions"
-    ],
     "modconfig": [
         "POST /api/delete_sr_banner",
         "POST /api/delete_sr_header",
@@ -61,7 +49,7 @@
         "POST /api/site_admin",
         "POST /api/subreddit_stylesheet",
         "POST /api/upload_sr_img",
-        "GET /r/{subreddit}/about/edit",
+        "GET /s/{subreddit}/about/edit",
         "GET /stylesheet"
     ],
     "modcontributors": [
@@ -78,9 +66,6 @@
         "GET /api/flairlist",
         "POST /api/flairtemplate"
     ],
-    "modlog": [
-        "GET /about/log"
-    ],
     "modothers": [
         "POST /api/setpermissions"
     ],
@@ -96,9 +81,7 @@
         "POST /api/set_suggested_sort",
         "POST /api/unignore_reports",
         "POST /api/unlock",
-        "POST /api/unmarknsfw",
-        "POST /api/spoiler",
-        "POST /api/unspoiler"
+        "POST /api/unmarknsfw"
     ],
     "modself": [
         "POST /api/accept_moderator_invite",
@@ -117,20 +100,19 @@
     "mysubreddits": [
         "GET /api/v1/me/friends/{username}",
         "GET /api/v1/me/karma",
-        "GET /subreddits/mine/contributor",
-        "GET /subreddits/mine/moderator",
-        "GET /subreddits/mine/subscriber",
-        "GET /subreddits/mine/{where}"
+        "GET /subs/mine/contributor",
+        "GET /subs/mine/moderator",
+        "GET /subs/mine/subscriber",
+        "GET /subs/mine/{where}"
     ],
     "privatemessages": [
         "POST /api/block",
         "POST /api/compose",
+        "POST /api/del/msg",
         "POST /api/read_all_messages",
         "POST /api/read_message",
         "POST /api/unblock_subreddit",
         "POST /api/unread_message",
-        "GET /api/v1/me/notifications",
-        "PATCH /api/v1/me/notifications/{id}",
         "GET /message/inbox",
         "GET /message/sent",
         "GET /message/unread",
@@ -140,6 +122,7 @@
         "GET /about/banned",
         "GET /about/contributors",
         "GET /about/edited",
+        "GET /about/log",
         "GET /about/moderators",
         "GET /about/modqueue",
         "GET /about/muted",
@@ -151,7 +134,7 @@
         "GET /about/{location}",
         "GET /about/{where}",
         "GET /api/filter/{filterpath}",
-        "GET /api/filter/{filterpath}/r/{srname}",
+        "GET /api/filter/{filterpath}/s/{srname}",
         "GET /api/info",
         "GET /api/morechildren",
         "GET /api/multi/mine",
@@ -159,48 +142,41 @@
         "GET /api/multi/{multipath}",
         "GET /api/multi/{multipath}/description",
         "PUT /api/multi/{multipath}/description",
-        "GET /api/multi/{multipath}/r/{srname}",
+        "GET /api/multi/{multipath}/s/{srname}",
         "GET /api/recommend/sr/{srnames}",
         "POST /api/search_reddit_names",
         "GET /api/subreddits_by_topic",
         "GET /api/v1/me/blocked",
         "GET /api/v1/me/friends",
         "GET /api/v1/user/{username}/trophies",
-        "GET /best",
         "GET /by_id/{names}",
         "GET /comments/{article}",
-        "GET /controversial",
         "GET /duplicates/{article}",
-        "GET /gilded",
+        "GET /fun",
         "GET /hot",
-        "GET /live/{thread}",
-        "GET /live/{thread}/about",
-        "GET /live/{thread}/contributors",
-        "GET /live/{thread}/discussions",
+        "GET /insightful",
         "GET /new",
         "GET /prefs/blocked",
         "GET /prefs/friends",
         "GET /prefs/{where}",
-        "GET /r/{subreddit}/about",
         "GET /random",
-        "GET /related/{article}",
-        "GET /r/{subreddit}/about/rules",
+        "GET /s/{subreddit}/about",
+        "GET /s/{subreddit}/about/rules",
         "GET /search",
         "GET /sidebar",
         "GET /sticky",
-        "GET /subreddits/default",
-        "GET /subreddits/gold",
-        "GET /subreddits/new",
-        "GET /subreddits/popular",
         "GET /subreddits/search",
-        "GET /subreddits/{where}",
+        "GET /subs/default",
+        "GET /subs/gold",
+        "GET /subs/new",
+        "GET /subs/popular",
+        "GET /subs/{where}",
         "GET /top",
         "GET /user/{username}/about",
         "GET /{sort}"
     ],
     "report": [
         "POST /api/hide",
-        "POST /api/live/{thread}/report",
         "POST /api/report",
         "POST /api/unhide"
     ],
@@ -211,8 +187,6 @@
         "POST /api/unsave"
     ],
     "submit": [
-        "POST /api/live/create",
-        "POST /api/live/{thread}/update",
         "POST /api/submit",
         "GET /api/submit_text"
     ],
@@ -220,15 +194,15 @@
         "DELETE /api/filter/{filterpath}",
         "POST /api/filter/{filterpath}",
         "PUT /api/filter/{filterpath}",
-        "DELETE /api/filter/{filterpath}/r/{srname}",
-        "PUT /api/filter/{filterpath}/r/{srname}",
+        "DELETE /api/filter/{filterpath}/s/{srname}",
+        "PUT /api/filter/{filterpath}/s/{srname}",
         "POST /api/multi/copy",
         "POST /api/multi/rename",
         "DELETE /api/multi/{multipath}",
         "POST /api/multi/{multipath}",
         "PUT /api/multi/{multipath}",
-        "DELETE /api/multi/{multipath}/r/{srname}",
-        "PUT /api/multi/{multipath}/r/{srname}",
+        "DELETE /api/multi/{multipath}/s/{srname}",
+        "PUT /api/multi/{multipath}/s/{srname}",
         "POST /api/subscribe",
         "DELETE /api/v1/me/friends/{username}",
         "PUT /api/v1/me/friends/{username}"
