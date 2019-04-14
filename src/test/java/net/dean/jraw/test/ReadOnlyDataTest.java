@@ -187,7 +187,7 @@ public class ReadOnlyDataTest extends RedditTest {
     @Test
     public void testGet() {
         try {
-            String[] nameArray = {"t5_31qvo", "t3_92dd8", "t1_c0b6xx0"};
+            String[] nameArray = {"t4_31qvo", "t5_92dd8", "t1_c0b6xx0"};
             List<String> names = Arrays.asList(nameArray);
             Listing<Thing> listing = reddit.get(nameArray);
             assertEquals(listing.size(), names.size());

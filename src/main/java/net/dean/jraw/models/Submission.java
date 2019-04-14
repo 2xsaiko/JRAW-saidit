@@ -196,7 +196,7 @@ public final class Submission extends PublicContribution {
     }
 
     /**
-     * Gets the fullname of the subreddit which the link is posted in (ex: "t5_2s5oq")
+     * Gets the fullname of the subreddit which the link is posted in (ex: "t4_2s5oq")
      * @return Gets the fullname of the subreddit
      */
     @JsonProperty

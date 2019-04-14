@@ -1,10 +1,17 @@
 package net.dean.jraw.models;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.TreeTraverser;
-
 import net.dean.jraw.EndpointImplementation;
 import net.dean.jraw.Endpoints;
 import net.dean.jraw.RedditClient;
@@ -13,14 +20,6 @@ import net.dean.jraw.http.RestResponse;
 import net.dean.jraw.http.SubmissionRequest;
 import net.dean.jraw.models.meta.Model;
 import net.dean.jraw.util.JrawUtils;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * <p>This class represents one comment in a comment tree.
@@ -83,7 +82,7 @@ public final class CommentNode implements Iterable<CommentNode> {
      * Instantiates a new root CommentNode. This will create a CommentNode for every Comment in {@code topLevelReplies},
      * and then for their children, and so on.
      *
-     * @param ownerId         The Submission's fullname (ex: t3_92dd8)
+     * @param ownerId         The Submission's fullname (ex: t5_92dd8)
      * @param topLevelReplies A list of top level replies to this submission
      * @param more            A MoreChildren object which can be used to retrieve more comments later
      */
@@ -136,7 +135,7 @@ public final class CommentNode implements Iterable<CommentNode> {
     }
 
     /**
-     * Gets fullname of the submission to which this CommentNode belongs (ex: t3_92dd8).
+     * Gets fullname of the submission to which this CommentNode belongs (ex: t5_92dd8).
      */
     public String getSubmissionName() {
         return ownerId;
@@ -438,7 +437,7 @@ public final class CommentNode implements Iterable<CommentNode> {
             return new ArrayList<>();
 
         // ownerId is a fullname, we only want the ID
-        String id = ownerId.substring("t3_".length());
+        String id = ownerId.substring("t5_".length());
         CommentNode newNode = reddit.getSubmission(new SubmissionRequest.Builder(id)
                 .focus(getComment().getId())
                 .build()).getComments();

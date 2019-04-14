@@ -1,8 +1,8 @@
 package net.dean.jraw.models;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import net.dean.jraw.util.Dimension;
 import net.dean.jraw.models.meta.JsonProperty;
+import net.dean.jraw.util.Dimension;
 
 /**
  * Represents a subreddit as it is displayed in the multireddit data structure.
@@ -62,7 +62,7 @@ public final class MultiSubreddit extends RedditObject {
         return _getDimension("icon_size");
     }
 
-    /** Gets this subreddit's fullname (ex: "t5_2qh33") */
+    /** Gets this subreddit's fullname (ex: "t4_2qh33") */
     @JsonProperty(nullable = true)
     public String getFullName() {
         return data("fullname");

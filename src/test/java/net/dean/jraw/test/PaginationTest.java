@@ -96,7 +96,7 @@ public class PaginationTest extends RedditTest {
     @Test
     public void testSpecificPaginator() throws NetworkException {
         // It would be easier to declare fullNames as an array, but we want to use List.contains()
-        List<String> fullNames = Arrays.asList("t3_92dd8", "t3_290287", "t3_28zy98", "t3_28zh9i");
+        List<String> fullNames = Arrays.asList("t5_92dd8", "t5_290287", "t5_28zy98", "t5_28zh9i");
         SpecificPaginator paginator = new SpecificPaginator(reddit, fullNames.toArray(new String[fullNames.size()]));
 
         Listing<Submission> submissions = paginator.next();

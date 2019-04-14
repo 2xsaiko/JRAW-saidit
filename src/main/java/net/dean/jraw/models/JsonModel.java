@@ -123,7 +123,7 @@ public abstract class JsonModel {
      *
      * <pre>{@code
      * {
-     *     "kind": "t5",
+     *     "kind": "t4",
      *     "data": {
      *         "submit_text_html": null,
      *         "user_is_banned": false,
