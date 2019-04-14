@@ -41,7 +41,7 @@ public class Endpoint implements Comparable<Endpoint> {
         }
 
         this.verb = parts[0].toUpperCase();
-        this.uri = parts[1];
+        this.uri = parts[1] + ".json";
         this.scope = scope;
         this.implemented = false;
     }
