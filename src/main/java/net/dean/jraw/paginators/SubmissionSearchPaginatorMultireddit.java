@@ -49,9 +49,9 @@ public class SubmissionSearchPaginatorMultireddit extends Paginator<Submission> 
     protected String getBaseUri() {
         String base = "search";
         if (multiReddit != null) {
-            base = multiReddit.getPath()+  base;
+            base = multiReddit.getPath() + base;
         }
-        return base;
+        return base + ".json";
     }
 
     @Override

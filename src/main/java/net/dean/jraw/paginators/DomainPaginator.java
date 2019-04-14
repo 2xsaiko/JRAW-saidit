@@ -55,7 +55,7 @@ public class DomainPaginator extends Paginator<Submission> {
 
     @Override
     protected String getBaseUri() {
-        return "/domain/" + domain + "/" + sorting.name().toLowerCase();
+        return "/domain/" + domain + "/" + sorting.name().toLowerCase() + ".json";
     }
 
     /**

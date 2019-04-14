@@ -1,13 +1,13 @@
 package net.dean.jraw.paginators;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import net.dean.jraw.EndpointImplementation;
 import net.dean.jraw.Endpoints;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Listing;
 import net.dean.jraw.models.Subreddit;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class provides a way to search for subreddits by both name and description
@@ -28,7 +28,7 @@ public class SubredditSearchPaginator extends Paginator<Subreddit> {
 
     @Override
     protected String getBaseUri() {
-        return "/subreddits/search";
+        return "/subreddits/search.json";
     }
 
     @Override

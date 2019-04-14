@@ -78,7 +78,7 @@ public class SubredditPaginator extends Paginator<Submission> {
     @Override
     protected String getBaseUri() {
         String path = "/" + sorting.name().toLowerCase();
-        return JrawUtils.getSubredditPath(subreddit, path);
+        return JrawUtils.getSubredditPath(subreddit, path) + ".json";
     }
 
     /** Gets the subreddit this Paginator is currently browsing, or null for the front page. */

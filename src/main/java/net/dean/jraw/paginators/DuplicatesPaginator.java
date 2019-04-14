@@ -34,7 +34,7 @@ public class DuplicatesPaginator extends Paginator<Submission> {
 
     @Override
     protected String getBaseUri() {
-        return "/duplicates/" + article;
+        return "/duplicates/" + article + ".json";
     }
 
     public String getArticle() {

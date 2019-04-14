@@ -38,7 +38,7 @@ public class SpecificPaginator extends Paginator<Submission> {
 
     @Override
     protected String getBaseUri() {
-        return "/by_id/" + compiledFullnames;
+        return "/by_id/" + compiledFullnames + ".json";
     }
 
     /**

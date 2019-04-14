@@ -1,9 +1,9 @@
 package net.dean.jraw.paginators;
 
+import java.util.Arrays;
+
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Thing;
-
-import java.util.Arrays;
 
 /**
  * This class provides a template for Paginators that use only a "where" attribute, such as {@code /user/username/{where}}.
@@ -38,7 +38,7 @@ public abstract class GenericPaginator<T extends Thing> extends Paginator<T> {
             pre += "/";
         }
 
-        return pre + where + getUriPostfix();
+        return pre + where + ".json" + getUriPostfix();
     }
 
     /**

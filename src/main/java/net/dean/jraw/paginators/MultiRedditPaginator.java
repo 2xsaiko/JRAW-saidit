@@ -42,7 +42,7 @@ public class MultiRedditPaginator extends Paginator<Submission> {
     @Override
     protected String getBaseUri() {
         String sort = sorting == null ? "" : sorting.name().toLowerCase();
-        return multiReddit.getPath() + sort;
+        return multiReddit.getPath() + ".json" + sort;
     }
 
     /**

@@ -34,6 +34,6 @@ public class CommentStream extends Paginator<Comment> {
     @Override
     protected String getBaseUri() {
         // "/s/{subreddit}/comments" or just "/comments"
-        return JrawUtils.getSubredditPath(subreddit, "/comments");
+        return JrawUtils.getSubredditPath(subreddit, "/comments") + ".json";
     }
 }

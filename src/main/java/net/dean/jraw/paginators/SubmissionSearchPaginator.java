@@ -50,7 +50,7 @@ public class SubmissionSearchPaginator extends Paginator<Submission> {
         if (subreddit != null) {
             base = "/s/" + subreddit + base;
         }
-        return base;
+        return base + ".json";
     }
 
     @Override
