@@ -71,14 +71,14 @@ public @interface Model {
         COMMENT("t1", Comment.class),
         /** Represents an account with the prefix "t2" */
         ACCOUNT("t2", Account.class),
-        /** Represents a submission with the prefix "t3" */
-        LINK("t3", Submission.class),
-        /** Represents a message with the prefix "t4" */
-        MESSAGE("t4", Message.class),
-        /** Represents a subreddit with the prefix "t5" */
-        SUBREDDIT("t5", Subreddit.class),
-        /** Represents an award with the prefix "t6" */
-        AWARD("t6", Trophy.class),
+        /** Represents an award with the prefix "t3" */
+        AWARD("t3", Trophy.class),
+        /** Represents a subreddit with the prefix "t4" */
+        SUBREDDIT("t4", Subreddit.class),
+        /** Represents a submission with the prefix "t5" */
+        LINK("t5", Submission.class),
+        /** Represents a message with the prefix "t6" */
+        MESSAGE("t6", Message.class),
         /** Represents a listing */
         LISTING("Listing", Listing.class),
         /** Represents a "more" object. See {@link MoreChildren} */
