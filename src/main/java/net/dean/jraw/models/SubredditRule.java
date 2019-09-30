@@ -63,14 +63,6 @@ public class SubredditRule extends JsonModel implements Created {
         return getDataNode().get("short_name").asText();
     }
 
-    /**
-     * Gets the violation reason, aka report reason for the rule
-     * @return The rule's violation reason
-     */
-    public String getViolationReason() {
-        return getDataNode().get("violation_reason").asText();
-    }
-
     public enum RuleKind {
         LINK,
         COMMENT,
